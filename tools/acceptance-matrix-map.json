@@ -1,0 +1,2481 @@
+{
+  "schema_version": "1",
+  "note": "PASS 仅用于下列显式映射：每条证据必须存在且断言通过；未列出的 A 项一律 PARTIAL 待抽验。 | 2026-09-24：unittest 证据统一为本轮 logs/q2-unittest-final.log；相位证据改指本轮 operator-all/demo-all/night-all 实际结果并注明适用性；外部独立证据按 SHA 引用。",
+  "groups": [
+    {
+      "ids": [
+        "R01"
+      ],
+      "status": "PASS",
+      "test": "R01PageRescanCursorTests.test_page_rescan_does_not_corrupt_daily_cursor",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_page_rescan_does_not_corrupt_daily_cursor (test_operator_closeout.R01PageRescanCursorTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R02"
+      ],
+      "status": "PASS",
+      "test": "R02EarlierDateRescanTests.test_earlier_date_rescan_recovers_excluded_floor",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_earlier_date_rescan_recovers_excluded_floor (test_operator_closeout.R02EarlierDateRescanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R03"
+      ],
+      "status": "PASS",
+      "test": "R03LoginTruthTests.*（403 与验证码两例）",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_forbidden_login_is_not_success (test_operator_closeout.R03LoginTruthTests)",
+            "test_captcha_login_is_not_success (test_operator_closeout.R03LoginTruthTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R04"
+      ],
+      "status": "PASS",
+      "test": "R04CrossThreadConfirmTests.test_cannot_confirm_other_thread_preview",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_cannot_confirm_other_thread_preview (test_operator_closeout.R04CrossThreadConfirmTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R05"
+      ],
+      "status": "PASS",
+      "test": "R05MaintenanceImportTests.test_import_rejected_during_maintenance",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_import_rejected_during_maintenance (test_operator_closeout.R05MaintenanceImportTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R06"
+      ],
+      "status": "PASS",
+      "test": "OperatorUiFlowTests.test_dirty_protection_and_rescan_ui",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_dirty_protection_and_rescan_ui (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R07"
+      ],
+      "status": "PASS",
+      "test": "R07ParserBodyStartTests.*",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_ubb_first_paragraph_is_body_not_unknown_field (test_operator_closeout.R07ParserBodyStartTests)",
+            "test_color_first_paragraph_is_body (test_operator_closeout.R07ParserBodyStartTests)",
+            "test_unknown_metadata_still_diagnosed (test_operator_closeout.R07ParserBodyStartTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "R08"
+      ],
+      "status": "PASS",
+      "test": "OperatorUiFlowTests.test_status_buttons_recover_and_rescan_date_backfill + ui phase checks",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_status_buttons_recover_and_rescan_date_backfill (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "F008"
+      ],
+      "status": "PASS",
+      "test": "OperatorUiFlowTests.test_status_buttons_recover_and_rescan_date_backfill",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_status_buttons_recover_and_rescan_date_backfill (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "F009"
+      ],
+      "status": "PASS",
+      "test": "同上（UTC+08:00 回填断言）",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_status_buttons_recover_and_rescan_date_backfill (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "F003"
+      ],
+      "status": "PASS",
+      "test": "ProfileMutexTests.*",
+      "command": "python -m unittest tests.test_operator_profile_mutex",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_two_services_same_profile_mutex (test_operator_profile_mutex.ProfileMutexTests)",
+            "test_cross_process_lock (test_operator_profile_mutex.ProfileMutexTests)",
+            "test_lock_released_after_failure (test_operator_profile_mutex.ProfileMutexTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A001"
+      ],
+      "status": "PASS",
+      "test": "chinese_cmd_from_foreign_cwd; operator_page_served; test_cli_init_creates_and_serves; test_console_entry_points_resolve",
+      "command": "python -m unittest tests.test_nga_access tests.test_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_console_entry_points_resolve (test_nga_access.EntryPointTests)",
+            "test_cli_init_creates_and_serves (test_web.TestCli)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/launch/summary.json",
+          "checks": [
+            "chinese_cmd_from_foreign_cwd",
+            "operator_page_served"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A002"
+      ],
+      "status": "PASS",
+      "test": "chinese_cmd_from_foreign_cwd; launcher_check_from_foreign_cwd",
+      "command": "tools/operator_acceptance.py",
+      "evidence": [
+        {
+          "kind": "phase_check",
+          "file": "operator-all/launch/summary.json",
+          "checks": [
+            "chinese_cmd_from_foreign_cwd",
+            "launcher_check_from_foreign_cwd"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A007"
+      ],
+      "status": "PASS",
+      "test": "http_shutdown_stops_server; test_cli_invalid_ports; test_occupied_port_releases_worker_and_allows_reopen",
+      "command": "python -m unittest tests.test_operator_factory_cleanup tests.test_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_occupied_port_releases_worker_and_allows_reopen (test_operator_factory_cleanup.FactoryCleanupTests)",
+            "test_cli_invalid_ports (test_web.TestCli)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/launch/summary.json",
+          "checks": [
+            "http_shutdown_stops_server"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A008"
+      ],
+      "status": "PASS",
+      "test": "normal_exit_process_ended; reopen_same_workspace; test_app_run_exit_notifies_watcher_service_before_close",
+      "command": "python -m unittest tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_app_run_exit_notifies_watcher_service_before_close (test_watcher_release_acceptance.F4ShutdownTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "normal_exit_process_ended",
+            "reopen_same_workspace"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A009"
+      ],
+      "status": "PASS",
+      "test": "test_changed_file_state_during_inspection_is_rejected; test_file_metadata_unchanged_after_inspection; test_no_sidecar_files_created",
+      "command": "python -m unittest tests.test_umalib_adapter_inspection",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_no_sidecar_files_created (test_umalib_adapter_inspection.ReadOnlyInvarianceTests)",
+            "test_file_metadata_unchanged_after_inspection (test_umalib_adapter_inspection.ReadOnlyInvarianceTests)",
+            "test_changed_file_state_during_inspection_is_rejected (test_umalib_adapter_inspection.ReadOnlyInvarianceTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A011"
+      ],
+      "status": "PASS",
+      "test": "add_nondefault_tid; test_add_and_read_thread; test_status_and_threads_flow",
+      "command": "python -m unittest tests.test_operator_http tests.test_operator_registry",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_status_and_threads_flow (test_operator_http.OperatorHttpTests)",
+            "test_add_and_read_thread (test_operator_registry.RegistryTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/threads-scan/summary.json",
+          "checks": [
+            "add_nondefault_tid"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A012"
+      ],
+      "status": "PASS",
+      "test": "duplicate_no_reset; test_duplicate_tid_no_reset",
+      "command": "python -m unittest tests.test_operator_registry",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_duplicate_tid_no_reset (test_operator_registry.RegistryTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/threads-scan/summary.json",
+          "checks": [
+            "duplicate_no_reset"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A014"
+      ],
+      "status": "PASS",
+      "test": "test_conflicting_duplicate_params_blocked; test_invalid_ids_blocked; test_invalid_url_rejected; test_userinfo_and_port_blocked",
+      "command": "python -m unittest tests.test_operator_registry tests.test_source_urls",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_userinfo_and_port_blocked (test_source_urls.SourceUrlTests)",
+            "test_conflicting_duplicate_params_blocked (test_source_urls.SourceUrlTests)",
+            "test_invalid_ids_blocked (test_source_urls.SourceUrlTests)",
+            "test_invalid_url_rejected (test_operator_registry.RegistryTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A020"
+      ],
+      "status": "PASS",
+      "test": "test_from_v1_maps_last_page; test_unknown_version_blocked; test_v2_roundtrip_and_validation",
+      "command": "python -m unittest tests.test_operator_models",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_from_v1_maps_last_page (test_operator_models.StateV2Tests)",
+            "test_v2_roundtrip_and_validation (test_operator_models.StateV2Tests)",
+            "test_unknown_version_blocked (test_operator_models.StateV2Tests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A027"
+      ],
+      "status": "PASS",
+      "test": "test_invalid_rescan_range_rejected_before_job_or_navigation; test_requested_page_is_used_during_preview",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries tests.test_operator_scan",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_requested_page_is_used_during_preview (test_operator_scan.OperatorScanTests)",
+            "test_invalid_rescan_range_rejected_before_job_or_navigation (test_operator_acceptance_boundaries.OperatorBoundaryTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A031"
+      ],
+      "status": "PASS",
+      "test": "test_official_login_redirect_is_manual_login_required; test_seven_states_and_buttons",
+      "command": "python -m unittest tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_official_login_redirect_is_manual_login_required (test_watcher_release_acceptance.F1LoginRedirectTests)",
+            "test_seven_states_and_buttons (test_watcher_release_acceptance.ReleaseUiStaticTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A034"
+      ],
+      "status": "PASS",
+      "test": "test_login_timeout_session_closed_once; test_login_waiting_confirm_retry_flow; test_shutdown_cancels_login_wait_not_success",
+      "command": "python -m unittest tests.test_watcher_release_acceptance tests.test_watcher_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_shutdown_cancels_login_wait_not_success (test_watcher_release_acceptance.F4ShutdownTests)",
+            "test_login_timeout_session_closed_once (test_watcher_release_acceptance.F1LoginRedirectTests)",
+            "test_login_waiting_confirm_retry_flow (test_watcher_web.WatcherScanApiTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A035"
+      ],
+      "status": "PASS",
+      "test": "test_only_one_network_job_across_different_threads",
+      "command": "python -m unittest tests.test_operator_jobs",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_only_one_network_job_across_different_threads (test_operator_jobs.OperatorJobTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A036"
+      ],
+      "status": "PASS",
+      "test": "test_adapter_uses_msedge_headless_false_explicit_profile; test_cross_process_lock; test_two_services_same_profile_mutex",
+      "command": "python -m unittest tests.test_nga_access tests.test_operator_profile_mutex",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_two_services_same_profile_mutex (test_operator_profile_mutex.ProfileMutexTests)",
+            "test_cross_process_lock (test_operator_profile_mutex.ProfileMutexTests)",
+            "test_adapter_uses_msedge_headless_false_explicit_profile (test_nga_access.BrowserAdapterTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A038"
+      ],
+      "status": "PASS",
+      "test": "test_refresh_resumes_active_run",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_refresh_resumes_active_run (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A040"
+      ],
+      "status": "PASS",
+      "test": "test_confirm_then_shutdown_aborts_without_success; test_shutdown_cancels_login_wait_not_success; test_stopped_service_refuses_new_scan_fresh_instance_works",
+      "command": "python -m unittest tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_confirm_then_shutdown_aborts_without_success (test_watcher_release_acceptance.F4ShutdownTests)",
+            "test_stopped_service_refuses_new_scan_fresh_instance_works (test_watcher_release_acceptance.F4ShutdownTests)",
+            "test_shutdown_cancels_login_wait_not_success (test_watcher_release_acceptance.F4ShutdownTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A041"
+      ],
+      "status": "PASS",
+      "test": "test_content_type_charset_priority; test_full_flow_fixture",
+      "command": "python -m unittest tests.test_nga_access tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_full_flow_fixture (test_watcher_release_acceptance.ReleaseFixtureIntegrationTests)",
+            "test_content_type_charset_priority (test_nga_access.CodecTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A042"
+      ],
+      "status": "PASS",
+      "test": "test_full_flow_fixture; test_no_trigger_ordinary_discussion",
+      "command": "python -m unittest tests.test_parser tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_full_flow_fixture (test_watcher_release_acceptance.ReleaseFixtureIntegrationTests)",
+            "test_no_trigger_ordinary_discussion (test_parser.ParseSubmissionUnitTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A043"
+      ],
+      "status": "PASS",
+      "test": "rescan_no_duplicate; test_known_unchanged_no_reimport; test_rerun_idempotent_and_edited_imported_floor_reports",
+      "command": "python -m unittest tests.test_watcher tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_rerun_idempotent_and_edited_imported_floor_reports (test_watcher_release_acceptance.ReleaseFixtureIntegrationTests)",
+            "test_known_unchanged_no_reimport (test_watcher.ScanTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/threads-scan/summary.json",
+          "checks": [
+            "rescan_no_duplicate"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A044"
+      ],
+      "status": "PASS",
+      "test": "test_edited_submission_creates_a_new_review_item; test_rerun_idempotent_and_edited_imported_floor_reports",
+      "command": "python -m unittest tests.test_operator_scan tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_rerun_idempotent_and_edited_imported_floor_reports (test_watcher_release_acceptance.ReleaseFixtureIntegrationTests)",
+            "test_edited_submission_creates_a_new_review_item (test_operator_scan.OperatorScanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A045"
+      ],
+      "status": "PASS",
+      "test": "test_page_rescan_35_pages_finishes_after_restart_without_repeating_batches",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_page_rescan_35_pages_finishes_after_restart_without_repeating_batches (test_operator_acceptance_boundaries.OperatorBoundaryTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A048"
+      ],
+      "status": "PASS",
+      "test": "test_cancel_between_pages_stops_fetching; test_cancel_preserves_completed_page_and_resume_imports_once; test_kill_after_imports_partial_then_restart_reuses_items",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries tests.test_watcher_recovery tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_cancel_preserves_completed_page_and_resume_imports_once (test_operator_acceptance_boundaries.OperatorBoundaryTests)",
+            "test_cancel_between_pages_stops_fetching (test_watcher_release_acceptance.F4ShutdownTests)",
+            "test_kill_after_imports_partial_then_restart_reuses_items (test_watcher_recovery.RecoveryMatrixTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A049"
+      ],
+      "status": "PASS",
+      "test": "test_failed_navigations_are_limited_and_spaced; test_first_interval; test_login_retry_gets_two_sleeps",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_failed_navigations_are_limited_and_spaced (test_operator_acceptance_boundaries.NavigationBoundaryTests)",
+            "test_first_interval (test_watcher_release_acceptance.F2NavigationGateTests)",
+            "test_login_retry_gets_two_sleeps (test_watcher_release_acceptance.F2NavigationGateTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A050"
+      ],
+      "status": "PASS",
+      "test": "test_earlier_date_rescan_recovers_excluded_floor; test_page_rescan_does_not_corrupt_daily_cursor",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_page_rescan_does_not_corrupt_daily_cursor (test_operator_closeout.R01PageRescanCursorTests)",
+            "test_earlier_date_rescan_recovers_excluded_floor (test_operator_closeout.R02EarlierDateRescanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A051"
+      ],
+      "status": "PASS",
+      "test": "test_dry_run_does_not_write_state_or_inbox; test_dry_run_writes_nothing; test_preview_creates_no_files_and_head_unchanged",
+      "command": "python -m unittest tests.test_watcher tests.test_watcher_web tests.test_workspace_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_dry_run_writes_nothing (test_watcher.ScanTests)",
+            "test_dry_run_does_not_write_state_or_inbox (test_watcher_web.WatcherScanApiTests)",
+            "test_preview_creates_no_files_and_head_unchanged (test_workspace_writer.WorkspaceWriterTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A052"
+      ],
+      "status": "PASS",
+      "test": "test_state_and_sha_are_bound_to_a_single_byte_read; test_state_changed_after_request_rejected_in_lock",
+      "command": "python -m unittest tests.test_watcher_release_acceptance tests.test_watcher_revision_regressions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_state_changed_after_request_rejected_in_lock (test_watcher_release_acceptance.F3ExpectedShaTests)",
+            "test_state_and_sha_are_bound_to_a_single_byte_read (test_watcher_revision_regressions.WatcherRevisionTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A056"
+      ],
+      "status": "PASS",
+      "test": "test_color_first_paragraph_is_body; test_ubb_first_paragraph_is_body_not_unknown_field; test_unknown_metadata_still_diagnosed",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_ubb_first_paragraph_is_body_not_unknown_field (test_operator_closeout.R07ParserBodyStartTests)",
+            "test_color_first_paragraph_is_body (test_operator_closeout.R07ParserBodyStartTests)",
+            "test_unknown_metadata_still_diagnosed (test_operator_closeout.R07ParserBodyStartTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A057"
+      ],
+      "status": "PASS",
+      "test": "test_optional_body_separator_starts_body_without_becoming_unknown_field; test_raw_text_preserved_exactly",
+      "command": "python -m unittest tests.test_parser",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_optional_body_separator_starts_body_without_becoming_unknown_field (test_parser.ParseSubmissionUnitTests)",
+            "test_raw_text_preserved_exactly (test_parser.ParseSubmissionUnitTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A058"
+      ],
+      "status": "PASS",
+      "test": "test_annotation_kept_as_text; test_annotation_reference_in_body_unchanged; test_trailing_annotations_plain",
+      "command": "python -m unittest tests.test_formatting_ubb tests.test_umalib_adapter_plan",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_trailing_annotations_plain (test_formatting_ubb.UbbStructureTests)",
+            "test_annotation_reference_in_body_unchanged (test_formatting_ubb.UbbStructureTests)",
+            "test_annotation_kept_as_text (test_umalib_adapter_plan.RendererTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A060"
+      ],
+      "status": "PASS",
+      "test": "test_choices_bind_current_working_draft; test_unsaved_edit_invalidates_ready_candidate_and_cannot_preview",
+      "command": "python -m unittest tests.test_demo_ui_flow tests.test_operator_edit_boundaries",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_unsaved_edit_invalidates_ready_candidate_and_cannot_preview (test_operator_edit_boundaries.OperatorEditBoundaryTests)",
+            "test_choices_bind_current_working_draft (test_demo_ui_flow.DemoUiFlowTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A066"
+      ],
+      "status": "PASS",
+      "test": "test_duplicate_name_blocks_and_explicit_id_resolves; test_unique_reuse_ambiguous_and_new_type",
+      "command": "python -m unittest tests.test_umalib_adapter_plan tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_unique_reuse_ambiguous_and_new_type (test_writer_web.WriterCatalogPlanPreviewTests)",
+            "test_duplicate_name_blocks_and_explicit_id_resolves (test_umalib_adapter_plan.TagResolutionTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A069"
+      ],
+      "status": "PASS",
+      "test": "test_dirty_blocks_scan; test_dirty_protection_and_rescan_ui; test_unsaved_writer_decisions_guard_switch_and_discard",
+      "command": "python -m unittest tests.test_operator_edit_boundaries tests.test_operator_ui_flow tests.test_watcher_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_dirty_protection_and_rescan_ui (test_operator_ui_flow.OperatorUiFlowTests)",
+            "test_unsaved_writer_decisions_guard_switch_and_discard (test_operator_edit_boundaries.OperatorEditBoundaryTests)",
+            "test_dirty_blocks_scan (test_watcher_web.WatcherFrontendStructureTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A070"
+      ],
+      "status": "PASS",
+      "test": "test_choices_bind_current_working_draft; test_stale_choice_rejected; test_stale_revision_rejected",
+      "command": "python -m unittest tests.test_demo_ui_flow tests.test_workspace_writer tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_choices_bind_current_working_draft (test_demo_ui_flow.DemoUiFlowTests)",
+            "test_stale_choice_rejected (test_writer_web.WriterWriteTests)",
+            "test_stale_revision_rejected (test_workspace_writer.WorkspaceWriterTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A074"
+      ],
+      "status": "PASS",
+      "test": "test_approval_binding_failures_create_no_files; test_write_approval_mismatches; ui_writer_generated",
+      "command": "python -m unittest tests.test_umalib_writer tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_write_approval_mismatches (test_writer_web.WriterWriteTests)",
+            "test_approval_binding_failures_create_no_files (test_umalib_writer.PathAndApprovalTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/ui/summary.json",
+          "checks": [
+            "ui_writer_generated"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A075"
+      ],
+      "status": "PASS",
+      "test": "test_preview_creates_no_files_and_head_unchanged; test_preview_no_paths_content_sql_and_immutable; test_preview_stable_and_no_files_no_disclosure",
+      "command": "python -m unittest tests.test_umalib_writer tests.test_workspace_writer tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_preview_creates_no_files_and_head_unchanged (test_workspace_writer.WorkspaceWriterTests)",
+            "test_preview_stable_and_no_files_no_disclosure (test_writer_web.WriterCatalogPlanPreviewTests)",
+            "test_preview_no_paths_content_sql_and_immutable (test_umalib_writer.PreviewPlanValidationTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A076"
+      ],
+      "status": "PASS",
+      "test": "test_blocked_and_forged_plans_rejected; test_not_ready_plan_raises_with_preview",
+      "command": "python -m unittest tests.test_umalib_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_not_ready_plan_raises_with_preview (test_umalib_writer.PathAndApprovalTests)",
+            "test_blocked_and_forged_plans_rejected (test_umalib_writer.PreviewPlanValidationTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A077"
+      ],
+      "status": "PASS",
+      "test": "test_late_preview_does_not_restore_old_candidate; test_stale_revision_rejected; test_unsaved_edit_invalidates_ready_candidate_and_cannot_preview",
+      "command": "python -m unittest tests.test_operator_edit_boundaries tests.test_workspace_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_unsaved_edit_invalidates_ready_candidate_and_cannot_preview (test_operator_edit_boundaries.OperatorEditBoundaryTests)",
+            "test_late_preview_does_not_restore_old_candidate (test_operator_edit_boundaries.OperatorEditBoundaryTests)",
+            "test_stale_revision_rejected (test_workspace_writer.WorkspaceWriterTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A078"
+      ],
+      "status": "PASS",
+      "test": "test_concurrent_write_only_one_succeeds; test_retry_same_operation_id_replays",
+      "command": "python -m unittest tests.test_workspace_writer tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_retry_same_operation_id_replays (test_workspace_writer.WorkspaceWriterTests)",
+            "test_concurrent_write_only_one_succeeds (test_writer_web.WriterWriteTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A079"
+      ],
+      "status": "PASS",
+      "test": "test_cannot_confirm_other_thread_preview; test_same_operation_id_different_request_conflicts",
+      "command": "python -m unittest tests.test_operator_closeout tests.test_workspace_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_same_operation_id_different_request_conflicts (test_workspace_writer.WorkspaceWriterTests)",
+            "test_cannot_confirm_other_thread_preview (test_operator_closeout.R04CrossThreadConfirmTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A080"
+      ],
+      "status": "PASS",
+      "test": "test_unexpected_post_write_transition_failure_uses_recovery_error; test_write_success_exported_and_history; test_writer_failure_keeps_approved",
+      "command": "python -m unittest tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_write_success_exported_and_history (test_writer_web.WriterWriteTests)",
+            "test_writer_failure_keeps_approved (test_writer_web.WriterWriteTests)",
+            "test_unexpected_post_write_transition_failure_uses_recovery_error (test_writer_web.WriterWriteTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A082"
+      ],
+      "status": "PASS",
+      "test": "T89_only_planned_increment; candidate_tagged_exact; tag_reuse_no_dup; test_abc_cumulative_write",
+      "command": "python -m unittest tests.test_workspace_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_abc_cumulative_write (test_workspace_writer.WorkspaceWriterTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/real-copy/summary.json",
+          "checks": [
+            "candidate_tagged_exact"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/real-copy/summary.json",
+          "checks": [
+            "T89_only_planned_increment"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/core/summary.json",
+          "checks": [
+            "tag_reuse_no_dup"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A083"
+      ],
+      "status": "PASS",
+      "test": "candidate_article_fields_exact; candidate_tagged_exact; test_article_fields_exact_readback",
+      "command": "python -m unittest tests.test_umalib_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_article_fields_exact_readback (test_umalib_writer.WriteSuccessTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/real-copy/summary.json",
+          "checks": [
+            "candidate_article_fields_exact",
+            "candidate_tagged_exact"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A084"
+      ],
+      "status": "PASS",
+      "test": "base_old_rows_unchanged; candidate_fk_and_integrity_ok; schema_and_non_target_tables_unchanged; source_database_unchanged; test_other_tables_rows_identical_after_write; test_other_tables_unchanged",
+      "command": "python -m unittest tests.test_umalib_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_other_tables_unchanged (test_umalib_writer.WriteSuccessTests)",
+            "test_other_tables_rows_identical_after_write (test_umalib_writer.SqlBoundaryTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/real-copy/summary.json",
+          "checks": [
+            "source_database_unchanged",
+            "base_old_rows_unchanged",
+            "schema_and_non_target_tables_unchanged",
+            "candidate_fk_and_integrity_ok"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A085"
+      ],
+      "status": "PASS",
+      "test": "test_cas_conflict; test_cas_stale_revision_rejected; test_concurrent_write_only_one_succeeds",
+      "command": "python -m unittest tests.test_operator_registry tests.test_workspace_store tests.test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_cas_stale_revision_rejected (test_workspace_store.AtomicWriteTests)",
+            "test_cas_conflict (test_operator_registry.RegistryTests)",
+            "test_concurrent_write_only_one_succeeds (test_writer_web.WriterWriteTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A086"
+      ],
+      "status": "PASS",
+      "test": "test_cross_process_lock; test_lock_file_present_after_holder_release; test_lock_released_after_failure; test_second_holder_cannot_acquire",
+      "command": "python -m unittest tests.test_operator_profile_mutex tests.test_workspace_store",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_second_holder_cannot_acquire (test_workspace_store.LockTests)",
+            "test_lock_file_present_after_holder_release (test_workspace_store.LockTests)",
+            "test_cross_process_lock (test_operator_profile_mutex.ProfileMutexTests)",
+            "test_lock_released_after_failure (test_operator_profile_mutex.ProfileMutexTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A088"
+      ],
+      "status": "PASS",
+      "test": "k1_killed_at_marker; k1_recovered; k2_killed_at_marker; k2_recovered; k3_killed_at_marker; k3_recovered; k4_killed_at_marker; k4_recovered; k5_killed_at_marker; k5_recovered; k6_killed_at_marker; k6_recovered; test_k1_intent_without_pending_abandonable; test_k2_pending_set_no_candidate_abandon; test_k3_orphan_candidate_abandon_keeps_file; test_k4_verified_then_complete_no_duplicate_insert; test_k5_exported_then_head_recovery; test_k6_head_then_committed_log_recovery",
+      "command": "python -m unittest tests.test_workspace_recovery",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_k1_intent_without_pending_abandonable (test_workspace_recovery.RecoveryMatrixTests)",
+            "test_k2_pending_set_no_candidate_abandon (test_workspace_recovery.RecoveryMatrixTests)",
+            "test_k3_orphan_candidate_abandon_keeps_file (test_workspace_recovery.RecoveryMatrixTests)",
+            "test_k4_verified_then_complete_no_duplicate_insert (test_workspace_recovery.RecoveryMatrixTests)",
+            "test_k5_exported_then_head_recovery (test_workspace_recovery.RecoveryMatrixTests)",
+            "test_k6_head_then_committed_log_recovery (test_workspace_recovery.RecoveryMatrixTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/recovery/summary.json",
+          "checks": [
+            "k1_killed_at_marker",
+            "k1_recovered",
+            "k2_killed_at_marker",
+            "k2_recovered",
+            "k3_killed_at_marker",
+            "k3_recovered",
+            "k4_killed_at_marker",
+            "k4_recovered",
+            "k5_killed_at_marker",
+            "k5_recovered",
+            "k6_killed_at_marker",
+            "k6_recovered"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A089"
+      ],
+      "status": "PASS",
+      "test": "test_create_roundtrip_and_restore; test_operator_thread_and_source_state_roundtrip",
+      "command": "python -m unittest tests.test_workspace_checkpoints",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_operator_thread_and_source_state_roundtrip (test_workspace_checkpoints.CheckpointTests)",
+            "test_create_roundtrip_and_restore (test_workspace_checkpoints.CheckpointTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A090"
+      ],
+      "status": "PASS",
+      "test": "first_three_sources_preserved; fourth_scanned; fourth_written_cumulative; reopen_restored_workspace; restore_new_uuid; test_create_roundtrip_and_restore; test_new_workspace_inbox_initialized_and_switch_back",
+      "command": "python -m unittest tests.test_operator_workspace_switch tests.test_workspace_checkpoints",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_create_roundtrip_and_restore (test_workspace_checkpoints.CheckpointTests)",
+            "test_new_workspace_inbox_initialized_and_switch_back (test_operator_workspace_switch.WorkspaceSwitchTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/lifecycle/summary.json",
+          "checks": [
+            "restore_new_uuid",
+            "reopen_restored_workspace",
+            "fourth_scanned",
+            "fourth_written_cumulative",
+            "first_three_sources_preserved"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A091"
+      ],
+      "status": "PASS",
+      "test": "reopen_deliveries_kept; test_retry_same_operation_id_replays; three_writes_completed; view_copy_separate_and_identical",
+      "command": "python -m unittest tests.test_workspace_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_retry_same_operation_id_replays (test_workspace_writer.WorkspaceWriterTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/review-writer/summary.json",
+          "checks": [
+            "view_copy_separate_and_identical"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/lifecycle/summary.json",
+          "checks": [
+            "reopen_deliveries_kept"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/real-copy/summary.json",
+          "checks": [
+            "three_writes_completed"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A093"
+      ],
+      "status": "PASS",
+      "test": "R08_chinese_status; no_horizontal_overflow_1024; test_dirty_protection_and_rescan_ui; test_safe_dom_and_responsive_layout",
+      "command": "python -m unittest tests.test_operator_ui_flow tests.test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_dirty_protection_and_rescan_ui (test_operator_ui_flow.OperatorUiFlowTests)",
+            "test_safe_dom_and_responsive_layout (test_watcher_release_acceptance.ReleaseUiStaticTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "no_horizontal_overflow_1024"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui/summary.json",
+          "checks": [
+            "R08_chinese_status"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A094"
+      ],
+      "status": "PASS",
+      "test": "R08_prev_next; R08_rescan_controls; journey_process_running; test_dirty_protection_and_rescan_ui; test_status_buttons_recover_and_rescan_date_backfill; ui_no_page_errors",
+      "command": "python -m unittest tests.test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_dirty_protection_and_rescan_ui (test_operator_ui_flow.OperatorUiFlowTests)",
+            "test_status_buttons_recover_and_rescan_date_backfill (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui/summary.json",
+          "checks": [
+            "R08_rescan_controls",
+            "R08_prev_next",
+            "ui_no_page_errors"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "journey_process_running"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A098"
+      ],
+      "status": "PASS",
+      "test": "test_failed_result_is_fail; test_missing_evidence_is_not_pass; test_unavailable_phase_never_passes_all; test_unmapped_defaults_partial",
+      "command": "python -m unittest tests.test_acceptance_matrix tests.test_watcher_revision_regressions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_missing_evidence_is_not_pass (test_acceptance_matrix.MatrixEvidenceTests)",
+            "test_failed_result_is_fail (test_acceptance_matrix.MatrixEvidenceTests)",
+            "test_unmapped_defaults_partial (test_acceptance_matrix.MatrixEvidenceTests)",
+            "test_unavailable_phase_never_passes_all (test_watcher_revision_regressions.LabRevisionTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A102"
+      ],
+      "status": "PASS",
+      "test": "test_boundaries_and_edge_cases; test_date_start_is_applied_to_first_scan; test_utc_to_shanghai_lower_bound",
+      "command": "python -m unittest tests.test_operator_date_filter tests.test_operator_models tests.test_operator_scan",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_boundaries_and_edge_cases (test_operator_date_filter.DateParseTests)",
+            "test_utc_to_shanghai_lower_bound (test_operator_models.ModelTests)",
+            "test_date_start_is_applied_to_first_scan (test_operator_scan.OperatorScanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A104"
+      ],
+      "status": "PASS",
+      "test": "test_invalid_rescan_range_rejected_before_job_or_navigation; test_start_three_shapes",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries tests.test_operator_models",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_invalid_rescan_range_rejected_before_job_or_navigation (test_operator_acceptance_boundaries.OperatorBoundaryTests)",
+            "test_start_three_shapes (test_operator_models.ModelTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A105"
+      ],
+      "status": "PASS",
+      "test": "test_date_filter_excludes_before_bound_and_keeps_unknown; test_discussion_not_entered_even_with_unknown_time; test_unknown_floor_date_is_visible_on_imported_draft",
+      "command": "python -m unittest tests.test_operator_date_filter tests.test_operator_scan",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_date_filter_excludes_before_bound_and_keeps_unknown (test_operator_date_filter.DateFilterScanTests)",
+            "test_discussion_not_entered_even_with_unknown_time (test_operator_date_filter.DateFilterScanTests)",
+            "test_unknown_floor_date_is_visible_on_imported_draft (test_operator_scan.OperatorScanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A106"
+      ],
+      "status": "PASS",
+      "test": "test_date_rescan_35_pages_covers_unordered_dates_and_survives_restart",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_date_rescan_35_pages_covers_unordered_dates_and_survives_restart (test_operator_acceptance_boundaries.OperatorBoundaryTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A109"
+      ],
+      "status": "PASS",
+      "test": "date_start_cursor_preserved; test_date_rescan_35_pages_covers_unordered_dates_and_survives_restart; test_page_rescan_does_not_corrupt_daily_cursor",
+      "command": "python -m unittest tests.test_operator_acceptance_boundaries tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_date_rescan_35_pages_covers_unordered_dates_and_survives_restart (test_operator_acceptance_boundaries.OperatorBoundaryTests)",
+            "test_page_rescan_does_not_corrupt_daily_cursor (test_operator_closeout.R01PageRescanCursorTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "date_start_cursor_preserved"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A110"
+      ],
+      "status": "PASS",
+      "test": "test_earlier_date_rescan_recovers_excluded_floor",
+      "command": "python -m unittest tests.test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_earlier_date_rescan_recovers_excluded_floor (test_operator_closeout.R02EarlierDateRescanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A013"
+      ],
+      "status": "PASS",
+      "test": "init_confirmed; init_preview_succeeded; test_tid_pid_normalized_and_to_page_removed",
+      "command": "python -m unittest test_source_urls",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_tid_pid_normalized_and_to_page_removed (test_source_urls.SourceUrlTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/threads-scan/summary.json",
+          "checks": [
+            "init_preview_succeeded",
+            "init_confirmed"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A021"
+      ],
+      "status": "PASS",
+      "test": "test_baseline_creates_state_without_parser_inbox; test_first_interval",
+      "command": "python -m unittest test_watcher test_watcher_release_acceptance",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_first_interval (test_watcher_release_acceptance.F2NavigationGateTests)",
+            "test_baseline_creates_state_without_parser_inbox (test_watcher.BaselineTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A028"
+      ],
+      "status": "PASS",
+      "test": "fourth_scanned; reopen_same_workspace; test_page_rescan_does_not_corrupt_daily_cursor; test_recurring_scan_discovers_a_new_tail_page",
+      "command": "python -m unittest test_operator_closeout test_operator_scan",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_recurring_scan_discovers_a_new_tail_page (test_operator_scan.OperatorScanTests)",
+            "test_page_rescan_does_not_corrupt_daily_cursor (test_operator_closeout.R01PageRescanCursorTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/lifecycle/summary.json",
+          "checks": [
+            "reopen_same_workspace",
+            "fourth_scanned"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A029"
+      ],
+      "status": "PASS",
+      "test": "test_baseline_creates_state_without_parser_inbox",
+      "command": "python -m unittest test_watcher",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_baseline_creates_state_without_parser_inbox (test_watcher.BaselineTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A032"
+      ],
+      "status": "PASS",
+      "test": "test_forbidden_login_is_not_success; test_login_confirm_then_one_retry_success; test_login_confirmed_but_still_failing_no_third_attempt",
+      "command": "python -m unittest test_operator_closeout test_watcher",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_login_confirm_then_one_retry_success (test_watcher.GateAReworkTests)",
+            "test_login_confirmed_but_still_failing_no_third_attempt (test_watcher.GateAReworkTests)",
+            "test_forbidden_login_is_not_success (test_operator_closeout.R03LoginTruthTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A046"
+      ],
+      "status": "PASS",
+      "test": "test_page_rescan_35_pages_finishes_after_restart_without_repeating_batches; test_page_rescan_does_not_corrupt_daily_cursor",
+      "command": "python -m unittest test_operator_acceptance_boundaries test_operator_closeout",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_page_rescan_35_pages_finishes_after_restart_without_repeating_batches (test_operator_acceptance_boundaries.OperatorBoundaryTests)",
+            "test_page_rescan_does_not_corrupt_daily_cursor (test_operator_closeout.R01PageRescanCursorTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A047"
+      ],
+      "status": "PASS",
+      "test": "test_import_failure_does_not_advance_state; test_metadata_edit_retried_after_state_write_failure_does_not_duplicate",
+      "command": "python -m unittest test_operator_acceptance_boundaries test_watcher",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_metadata_edit_retried_after_state_write_failure_does_not_duplicate (test_operator_acceptance_boundaries.OperatorBoundaryTests)",
+            "test_import_failure_does_not_advance_state (test_watcher.ScanTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A064"
+      ],
+      "status": "PASS",
+      "test": "candidate_article_fields_exact; test_order_preserved_and_flattened; test_source_not_url_normalized; test_source_required_and_ordered; test_submission_equals_working_draft_deep_copy",
+      "command": "python -m unittest test_handoff test_parser test_umalib_adapter_plan test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_source_required_and_ordered (test_writer_web.WriterCatalogPlanPreviewTests)",
+            "test_source_not_url_normalized (test_parser.ParseSubmissionUnitTests)",
+            "test_order_preserved_and_flattened (test_umalib_adapter_plan.SourceTests)",
+            "test_submission_equals_working_draft_deep_copy (test_handoff.HandoffPackageTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/real-copy/summary.json",
+          "checks": [
+            "candidate_article_fields_exact"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A065"
+      ],
+      "status": "PASS",
+      "test": "test_choices_bind_current_working_draft; test_not_available_and_invalid_tokens; test_selection_required_when_available; test_stale_choice_rejected",
+      "command": "python -m unittest test_demo_ui_flow test_umalib_adapter_plan test_writer_web",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_selection_required_when_available (test_umalib_adapter_plan.SourceTests)",
+            "test_not_available_and_invalid_tokens (test_umalib_adapter_plan.SourceTests)",
+            "test_choices_bind_current_working_draft (test_demo_ui_flow.DemoUiFlowTests)",
+            "test_stale_choice_rejected (test_writer_web.WriterWriteTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A073"
+      ],
+      "status": "PASS",
+      "test": "test_duplicate_evidence; test_duplicate_ids_capped_and_sorted; test_valid_transition_writes_history_with_time_and_reason",
+      "command": "python -m unittest test_inbox test_umalib_writer",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_duplicate_evidence (test_umalib_writer.PreviewPlanValidationTests)",
+            "test_duplicate_ids_capped_and_sorted (test_umalib_writer.PreviewPlanValidationTests)",
+            "test_valid_transition_writes_history_with_time_and_reason (test_inbox.InboxTransitionTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A095"
+      ],
+      "status": "PASS",
+      "test": "all_four_sources_exact; checkpoint_created_dom; date_start_cursor_preserved; four_cumulative; normal_exit_process_ended; reopen_same_workspace",
+      "command": "tools/operator_acceptance.py",
+      "evidence": [
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "checkpoint_created_dom",
+            "normal_exit_process_ended",
+            "reopen_same_workspace",
+            "four_cumulative",
+            "all_four_sources_exact",
+            "date_start_cursor_preserved",
+            "restored_workspace_loaded_via_cmd",
+            "a068_dom_after_restore_matches",
+            "entry_processes_exited_after_cleanup"
+          ]
+        }
+      ],
+      "applicability": "Astra 09-22 要求：改用本轮（2026-09-24）增强旅程 25 项结果，含恢复新区与 A068 重开/恢复比对。"
+    },
+    {
+      "ids": [
+        "A097"
+      ],
+      "status": "PASS",
+      "test": "operator_page_served; original_error_kept; test_missing_evidence_is_not_pass; test_passing_log_is_pass; ui_demo_booted",
+      "command": "python -m unittest test_acceptance_matrix",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_passing_log_is_pass (test_acceptance_matrix.MatrixEvidenceTests)",
+            "test_missing_evidence_is_not_pass (test_acceptance_matrix.MatrixEvidenceTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/ui/summary.json",
+          "checks": [
+            "ui_demo_booted"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/launch/summary.json",
+          "checks": [
+            "operator_page_served"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "night-all/all-summary.json",
+          "checks": [
+            "original_error_kept"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/launch/summary.json",
+          "checks": [
+            "chinese_cmd_from_foreign_cwd",
+            "operator_page_served",
+            "http_shutdown_stops_server"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "demo-all/core/summary.json",
+          "checks": [
+            "C_three_articles",
+            "D_after_restart",
+            "D_has_all_four"
+          ]
+        },
+        {
+          "kind": "json_field",
+          "file": "night-all/all-summary.json",
+          "fields": [
+            {
+              "path": "overall",
+              "expected": "PASS"
+            }
+          ]
+        }
+      ],
+      "applicability": "Astra 09-22 要求：A097 指向本轮最终回归——unittest 全量 + operator all 十阶段 + Demo all + night all 的实际分项结果。"
+    },
+    {
+      "ids": [
+        "A101"
+      ],
+      "status": "PASS",
+      "test": "date_start_cursor_preserved; test_date_start_is_applied_to_first_scan; test_status_buttons_recover_and_rescan_date_backfill",
+      "command": "python -m unittest test_operator_scan test_operator_ui_flow",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_date_start_is_applied_to_first_scan (test_operator_scan.OperatorScanTests)",
+            "test_status_buttons_recover_and_rescan_date_backfill (test_operator_ui_flow.OperatorUiFlowTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "date_start_cursor_preserved"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A003"
+      ],
+      "status": "PASS",
+      "test": "test_cmd_runs_check_from_foreign_cwd_without_pythonpath; test_crlf_utf8_and_failure_branches; test_missing_python_keeps_window_and_explains",
+      "command": "python -m unittest test_entry_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_crlf_utf8_and_failure_branches (test_entry_assertions.EntryCommandAssertions)",
+            "test_cmd_runs_check_from_foreign_cwd_without_pythonpath (test_entry_assertions.EntryCommandAssertions)",
+            "test_missing_python_keeps_window_and_explains (test_entry_assertions.EntryCommandAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A004"
+      ],
+      "status": "PASS",
+      "test": "test_shortcut_targets_real_entry_and_no_desktop_writes",
+      "command": "python -m unittest test_entry_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_shortcut_targets_real_entry_and_no_desktop_writes (test_entry_assertions.ShortcutAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A005"
+      ],
+      "status": "PASS",
+      "test": "test_single_console_without_legacy_dom",
+      "command": "python -m unittest test_entry_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_single_console_without_legacy_dom (test_entry_assertions.SingleConsoleAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A006"
+      ],
+      "status": "PASS",
+      "test": "test_missing_dependencies_have_specific_messages",
+      "command": "python -m unittest test_entry_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_missing_dependencies_have_specific_messages (test_entry_assertions.DependencyMessageAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A010"
+      ],
+      "status": "PASS",
+      "test": "test_changing_source_keeps_old_workspace_head",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_changing_source_keeps_old_workspace_head (test_feature_assertions.SourceSwitchAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A015"
+      ],
+      "status": "PASS",
+      "test": "test_rename_and_toggle_keep_items_and_cursor",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_rename_and_toggle_keep_items_and_cursor (test_feature_assertions.ThreadManagementAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A016"
+      ],
+      "status": "PASS",
+      "test": "test_per_thread_snapshots_and_run_logs_are_isolated",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_per_thread_snapshots_and_run_logs_are_isolated (test_feature_assertions.ThreadManagementAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A017"
+      ],
+      "status": "PASS",
+      "test": "test_same_pid_and_body_across_threads_stay_separate",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_same_pid_and_body_across_threads_stay_separate (test_feature_assertions.CrossThreadIsolationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A018"
+      ],
+      "status": "PASS",
+      "test": "test_restart_restores_active_thread_and_enabled_state",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_restart_restores_active_thread_and_enabled_state (test_feature_assertions.RestartStateAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A019"
+      ],
+      "status": "PASS",
+      "test": "test_switching_active_thread_mid_scan_keeps_state_separate",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_switching_active_thread_mid_scan_keeps_state_separate (test_feature_assertions.CrossThreadIsolationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A022"
+      ],
+      "status": "PASS",
+      "test": "test_single_page_scan_reuses_homepage_read",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_single_page_scan_reuses_homepage_read (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A023"
+      ],
+      "status": "PASS",
+      "test": "test_wrong_tid_init_fails_without_state",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_wrong_tid_init_fails_without_state (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A024"
+      ],
+      "status": "PASS",
+      "test": "test_baseline_stores_tail_floors_with_real_page",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_baseline_stores_tail_floors_with_real_page (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A025"
+      ],
+      "status": "PASS",
+      "test": "test_stale_or_duplicate_confirm_does_not_overwrite_state",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_stale_or_duplicate_confirm_does_not_overwrite_state (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A026"
+      ],
+      "status": "PASS",
+      "test": "test_page_mode_n_first_batch_includes_page_n_only",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_page_mode_n_first_batch_includes_page_n_only (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A030"
+      ],
+      "status": "PASS",
+      "test": "test_failed_init_keeps_existing_inbox",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_failed_init_keeps_existing_inbox (test_feature_assertions.InitializationAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A033"
+      ],
+      "status": "PASS",
+      "test": "test_expired_challenge_and_network_are_reported_separately",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_expired_challenge_and_network_are_reported_separately (test_feature_assertions.LoginDiagnosticsAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A037"
+      ],
+      "status": "PASS",
+      "test": "test_session_created_used_and_closed_on_one_thread",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_session_created_used_and_closed_on_one_thread (test_feature_assertions.SessionLifecycleAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A039"
+      ],
+      "status": "PASS",
+      "test": "test_late_old_preview_confirm_is_rejected",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_late_old_preview_confirm_is_rejected (test_feature_assertions.ThreadManagementAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A053"
+      ],
+      "status": "PASS",
+      "test": "test_a053_zero_result_reasons",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a053_zero_result_reasons (test_operator_dom_gaps.DomGapTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A054"
+      ],
+      "status": "PASS",
+      "test": "test_a054_jump_binds_scanned_thread_and_resets_filters",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a054_jump_binds_scanned_thread_and_resets_filters (test_operator_dom_gaps.DomGapTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A055"
+      ],
+      "status": "PASS",
+      "test": "test_manual_edit_still_works_after_network_failure",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_manual_edit_still_works_after_network_failure (test_feature_assertions.OfflineEditingAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A059"
+      ],
+      "status": "PASS",
+      "test": "A059_format_adoption_save_preview_reload",
+      "command": "tools/operator_acceptance.py",
+      "evidence": [
+        {
+          "kind": "json_field",
+          "file": "referenced/astra-20260921/astra-review-20260921-a059-a067-result.json",
+          "fields": [
+            {
+              "path": "checks.A059_format_adoption_save_preview_reload",
+              "expected": "PASS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A061"
+      ],
+      "status": "PASS",
+      "test": "test_attachment_format_preserved_with_warning; test_table_format_preserved_with_warning",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_attachment_format_preserved_with_warning (test_feature_assertions.UnsupportedFormatAssertions)",
+            "test_table_format_preserved_with_warning (test_feature_assertions.UnsupportedFormatAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A062"
+      ],
+      "status": "PASS",
+      "test": "status",
+      "command": "tools/operator_acceptance.py",
+      "evidence": [
+        {
+          "kind": "json_field",
+          "file": "referenced/astra-20260921/astra-review-20260921-a062-result.json",
+          "fields": [
+            {
+              "path": "status",
+              "expected": "PASS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A063"
+      ],
+      "status": "PASS",
+      "test": "test_poster_name_does_not_override_author_field",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_poster_name_does_not_override_author_field (test_feature_assertions.PosterAuthorAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A067"
+      ],
+      "status": "PASS",
+      "test": "test_a067_tag_options_show_chinese_types_and_backfill",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a067_tag_options_show_chinese_types_and_backfill (test_operator_dom_gaps.DomGapTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A068"
+      ],
+      "status": "PASS",
+      "test": "a068_choices_after_restore_http; a068_dom_backfill_stable; a068_pending_choices_saved; a068_pending_item_present; status",
+      "command": "tools/operator_acceptance.py",
+      "evidence": [
+        {
+          "kind": "json_field",
+          "file": "referenced/astra-20260921/astra-review-20260921-a068-result.json",
+          "fields": [
+            {
+              "path": "status",
+              "expected": "PASS"
+            }
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "a068_pending_choices_saved",
+            "a068_choices_after_restore_http",
+            "a068_dom_backfill_stable",
+            "a068_pending_item_present"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    },
+    {
+      "ids": [
+        "A071"
+      ],
+      "status": "PASS",
+      "test": "test_author_filter_and_second_page",
+      "command": "python -m unittest test_feature_assertions_http",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_author_filter_and_second_page (test_feature_assertions_http.ListFilterAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A072"
+      ],
+      "status": "PASS",
+      "test": "test_a072_updated_version_compare_and_export_lock",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a072_updated_version_compare_and_export_lock (test_operator_dom_gaps.DomGapTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A081"
+      ],
+      "status": "PASS",
+      "test": "test_two_threads_accumulate_and_folder_actions_are_verified",
+      "command": "python -m unittest test_feature_assertions_http",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_two_threads_accumulate_and_folder_actions_are_verified (test_feature_assertions_http.CrossThreadDeliveryAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A087"
+      ],
+      "status": "PASS",
+      "test": "test_all_mutation_endpoints_rejected_during_maintenance",
+      "command": "python -m unittest test_feature_assertions_http",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_all_mutation_endpoints_rejected_during_maintenance (test_feature_assertions_http.MaintenanceGateAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A092"
+      ],
+      "status": "PASS",
+      "test": "test_two_threads_accumulate_and_folder_actions_are_verified",
+      "command": "python -m unittest test_feature_assertions_http",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_two_threads_accumulate_and_folder_actions_are_verified (test_feature_assertions_http.CrossThreadDeliveryAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A096"
+      ],
+      "status": "PASS",
+      "test": "test_bundle_excludes_real_data_and_starts_from_chinese_path",
+      "command": "python -m unittest test_feature_assertions_bundle",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_bundle_excludes_real_data_and_starts_from_chinese_path (test_feature_assertions_bundle.BundleSmokeAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A103"
+      ],
+      "status": "PASS",
+      "test": "test_imported_floor_keeps_original_posted_time",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_imported_floor_keeps_original_posted_time (test_feature_assertions.PostedTimeTraceabilityAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A107"
+      ],
+      "status": "PASS",
+      "test": "test_pinned_and_quoted_dates_do_not_skip_pages",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_pinned_and_quoted_dates_do_not_skip_pages (test_feature_assertions.PinnedAndQuotedDateAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A108"
+      ],
+      "status": "PASS",
+      "test": "test_a108_date_counts_and_a112_help_note",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a108_date_counts_and_a112_help_note (test_operator_dom_gaps.DomGapTests)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A111"
+      ],
+      "status": "PASS",
+      "test": "test_date_rescan_cancel_then_resume_keeps_range",
+      "command": "python -m unittest test_feature_assertions",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_date_rescan_cancel_then_resume_keeps_range (test_feature_assertions.DateRescanResilienceAssertions)"
+          ]
+        }
+      ]
+    },
+    {
+      "ids": [
+        "A112"
+      ],
+      "status": "PASS",
+      "test": "date_start_cursor_preserved; four_cumulative; restored_workspace_loaded_via_cmd; test_a108_date_counts_and_a112_help_note; wizard_bound_via_dom",
+      "command": "python -m unittest test_operator_dom_gaps",
+      "evidence": [
+        {
+          "kind": "unittest_log",
+          "file": "logs/q2-unittest-final.log",
+          "must_contain": [
+            "test_a108_date_counts_and_a112_help_note (test_operator_dom_gaps.DomGapTests)"
+          ]
+        },
+        {
+          "kind": "phase_check",
+          "file": "operator-all/ui-journey/summary.json",
+          "checks": [
+            "wizard_bound_via_dom",
+            "restored_workspace_loaded_via_cmd",
+            "four_cumulative",
+            "date_start_cursor_preserved"
+          ]
+        }
+      ],
+      "applicability": "证据改指本轮（2026-09-24）同一最终源码的实际运行结果；旧轮引用仅作历史回归。"
+    }
+  ]
+}

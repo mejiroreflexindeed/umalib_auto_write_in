@@ -1,0 +1,156 @@
+/* TASK-014/015 产品页面样式（Win7 风格 + 两档响应布局） */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding-bottom: 34px; /* 预留底部状态条高度 */
+  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  font-size: 13px;
+  background: #eef3f8;
+  color: #1f2d3a;
+}
+
+#title-bar {
+  background: linear-gradient(#d6e9ff, #9cc4ee);
+  border-bottom: 1px solid #7ea6cc;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: #1f3d5c;
+}
+
+#main-nav { padding: 6px 12px; background: #f3f7fb; border-bottom: 1px solid #c3d3e2; }
+#main-nav button { min-width: 96px; margin-right: 4px; }
+#main-nav button.active { background: #e3effa; border-color: #4a7cb0; }
+
+.page { padding: 10px; }
+.hidden { display: none !important; }
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #b7c9da;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  min-width: 0;
+}
+
+.columns { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+.columns > .panel { flex: 1 1 auto; min-width: 0; }
+
+/* 首页：左侧帖子列表 280—320px，右侧操作区占满 */
+#thread-list { flex: 0 0 300px; max-width: 320px; }
+#thread-list + .panel { flex: 1 1 420px; }
+#thread-url { width: 100%; }
+
+/* 审核：宽屏列表 300—360px，编辑区占剩余空间 */
+#inbox-table { flex: 0 0 340px; max-width: 360px; }
+#review-panel { flex: 1 1 520px; }
+
+button {
+  background: linear-gradient(#fdfdfd, #e4eef7);
+  border: 1px solid #9ab6cf;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #1f2d3a;
+}
+button:hover { background: #eaf3fb; }
+button:disabled { background: #e8e8e8; color: #8a97a3; border-color: #c8c8c8; cursor: not-allowed; }
+button.primary { background: linear-gradient(#eaf5ff, #c3e0f8); border-color: #4a7cb0; }
+button.danger { background: linear-gradient(#fdeeee, #f2d0d0); border-color: #b06a6a; }
+
+input[type="text"], input[type="number"], input[type="date"],
+input[type="datetime-local"], textarea, select {
+  border: 1px solid #a9bfd4;
+  padding: 3px 6px;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 13px;
+  margin: 2px 0;
+  max-width: 100%;
+}
+
+textarea { width: 100%; }
+
+/* 编辑字段铺满可用宽度 */
+.field-row { display: flex; align-items: flex-start; gap: 6px; margin: 4px 0; }
+.field-row > label { flex: 0 0 120px; color: #4a6584; padding-top: 4px; }
+.field-row > input[type="text"] { flex: 1 1 auto; width: 100%; }
+.field-row > textarea { flex: 1 1 auto; width: 100%; }
+
+/* 操作条在编辑区持续可达 */
+.action-bar {
+  position: sticky;
+  bottom: 34px;
+  background: #f7fbff;
+  border-top: 1px solid #c3d3e2;
+  padding: 8px 4px;
+  margin-top: 8px;
+  z-index: 5;
+}
+#review-form > div > button { margin-right: 6px; }
+
+details.sources-block { margin: 6px 0; border: 1px solid #d5e1ec; padding: 4px 8px; }
+details.sources-block summary { cursor: pointer; color: #35506b; }
+
+.msg { margin: 6px 0; min-height: 1em; }
+.muted { color: #6b7f94; font-weight: normal; }
+.error { color: #a02020; }
+.warn { color: #a06000; }
+.ok { color: #1e7a1e; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+table th, table td {
+  border: 1px solid #c3d3e2;
+  padding: 4px 6px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+table th { background: #eef4fa; }
+tbody tr:hover { background: #f0f7fc; }
+tbody tr.selected { background: #dcebfa; }
+
+pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 4px 0; }
+
+#status-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #eef4fa; border-top: 1px solid #b7c9da;
+  padding: 4px 12px; display: flex; justify-content: space-between; gap: 8px;
+  font-size: 12px; z-index: 10;
+}
+
+#settings-help { white-space: pre-line; line-height: 1.6; }
+.help-steps li { margin: 3px 0; }
+#workspace-list div { margin: 4px 0; }
+#workspace-list button { margin-left: 8px; }
+.preview-render {
+  border: 1px solid #c3d3e2; background: #fff; padding: 8px;
+  min-height: 24px; overflow-wrap: anywhere;
+}
+.preview-render p { margin: 4px 0; }
+
+#thread-list .thread-entry {
+  border: 1px solid #d5e1ec; margin: 4px 0; padding: 6px;
+  cursor: pointer; border-radius: 3px; overflow-wrap: anywhere;
+}
+#thread-list .thread-entry.active { background: #dcebfa; border-color: #4a7cb0; }
+#thread-list .thread-entry.disabled { color: #8a97a3; }
+
+#inbox-filter { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#rescan-panel { border-top: 1px dashed #c3d3e2; margin-top: 8px; padding-top: 6px; }
+
+@media (max-width: 1100px) {
+  .columns { flex-direction: column; }
+  .columns > .panel,
+  #thread-list,
+  #inbox-table,
+  #review-panel { flex: 1 1 auto; width: 100%; max-width: none; }
+  .field-row { flex-direction: column; gap: 2px; }
+  .field-row > label { flex: 0 0 auto; padding-top: 0; }
+  #main-nav button { min-width: 72px; }
+}

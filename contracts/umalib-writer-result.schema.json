@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.umalib-ingest.invalid/contracts/umalib-writer-result.schema.json",
+  "title": "CandidateWriteResult",
+  "description": "Deep-immutable evidence that a candidate copy write completed and was verified. It proves the candidate copy was written, not that any production database was replaced.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "success",
+    "plan_sha256",
+    "preview_sha256",
+    "source",
+    "candidate",
+    "inserted",
+    "counts_before",
+    "counts_after",
+    "checks",
+    "result_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "success": { "const": true },
+    "plan_sha256": { "$ref": "#/$defs/sha256" },
+    "preview_sha256": { "$ref": "#/$defs/sha256" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "database_sha256_before",
+        "database_sha256_after",
+        "unchanged"
+      ],
+      "properties": {
+        "file_name": { "type": "string", "minLength": 1 },
+        "database_sha256_before": { "$ref": "#/$defs/sha256" },
+        "database_sha256_after": { "$ref": "#/$defs/sha256" },
+        "unchanged": { "const": true }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_name", "database_sha256", "size_bytes"],
+      "properties": {
+        "file_name": { "type": "string", "minLength": 1 },
+        "database_sha256": { "$ref": "#/$defs/sha256" },
+        "size_bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "inserted": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "article_id",
+        "created_tags",
+        "reused_tag_ids",
+        "tagged_ids",
+        "tagged_count"
+      ],
+      "properties": {
+        "article_id": { "type": "integer", "minimum": 1 },
+        "created_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/createdTag" }
+        },
+        "reused_tag_ids": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "tagged_ids": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "tagged_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "counts_before": { "$ref": "#/$defs/counts" },
+    "counts_after": { "$ref": "#/$defs/counts" },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "article_readback",
+        "created_tags_readback",
+        "tagged_readback",
+        "integrity_check",
+        "foreign_key_violation_count",
+        "duplicate_tagged_pair_count",
+        "inspector_blocker_count"
+      ],
+      "properties": {
+        "article_readback": { "const": true },
+        "created_tags_readback": { "const": true },
+        "tagged_readback": { "const": true },
+        "integrity_check": { "const": true },
+        "foreign_key_violation_count": { "const": 0 },
+        "duplicate_tagged_pair_count": { "const": 0 },
+        "inspector_blocker_count": { "const": 0 }
+      }
+    },
+    "result_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["article", "tag", "tagged"],
+      "properties": {
+        "article": { "type": "integer", "minimum": 0 },
+        "tag": { "type": "integer", "minimum": 0 },
+        "tagged": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "createdTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": { "type": "integer", "minimum": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    }
+  }
+}

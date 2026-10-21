@@ -1,0 +1,997 @@
+{
+  "schema_version": "1",
+  "tid": 30099686,
+  "note": "TASK-012B W2 语料：全部为合成假数据（PID 9100xxxx、假标题/作者），预期按 docs/11、docs/12、AGENTS 契约手工撰写，不由被测实现生成。契约外现象标 MANUAL/UNSUPPORTED_WITH_DIAGNOSTIC。",
+  "scenarios": [
+    {
+      "scenario_id": "S01",
+      "category": "discussion",
+      "purpose": "普通讨论楼层无独立行 [收录]，只记 seen，不入 Inbox",
+      "basis": "docs/11 §6",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001001", "content": "普通讨论内容"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 1, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "state_floors": {"910001001": {"trigger_found": false, "inbox_item_id": null, "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S02",
+      "category": "trigger",
+      "purpose": "独立行 [收录] 且 title/author/tags/body 齐全 → candidate 入队并绑定 state",
+      "basis": "docs/11 §6/§7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001002", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001002"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001002", "status": "candidate"}],
+        "state_floors": {"910001002": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false,
+                                        "imported_content_sha256": "same"}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S03",
+      "category": "trigger",
+      "purpose": "行内提及（非独立行）不触发导入",
+      "basis": "docs/11 §6；触发行须独立成行",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001003", "content": "我[收录]了这个作品，大家看看"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 1, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "state_floors": {"910001003": {"trigger_found": false, "inbox_item_id": null, "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S04",
+      "category": "incomplete",
+      "purpose": "缺 title → incomplete",
+      "basis": "docs/11 §7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001004", "content": "[收录]\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001004"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001004", "status": "incomplete"}],
+        "state_floors": {"910001004": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S05",
+      "category": "incomplete",
+      "purpose": "缺 author → incomplete",
+      "basis": "docs/11 §7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001005", "content": "[收录]\n[标题] 标题甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001005"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001005", "status": "incomplete"}],
+        "state_floors": {"910001005": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S06",
+      "category": "incomplete",
+      "purpose": "缺 tags → incomplete",
+      "basis": "docs/11 §7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001006", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001006"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001006", "status": "incomplete"}],
+        "state_floors": {"910001006": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S07",
+      "category": "incomplete",
+      "purpose": "缺 body（正文为空）→ incomplete",
+      "basis": "docs/11 §7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001007", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001007"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001007", "status": "incomplete"}],
+        "state_floors": {"910001007": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S08",
+      "category": "incomplete",
+      "purpose": "只有 [收录] 行，其余全缺 → incomplete",
+      "basis": "docs/11 §7",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001008", "content": "[收录]"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001008"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001008", "status": "incomplete"}],
+        "state_floors": {"910001008": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S09",
+      "category": "fields",
+      "purpose": "未知字段行（[出处]）不影响 required 判定，保留为 UnknownField → candidate",
+      "basis": "docs/11 §8；parser 未知字段保留",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001009", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n[出处] 某处\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001009"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001009", "status": "candidate"}],
+        "state_floors": {"910001009": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S10",
+      "category": "order",
+      "purpose": "多楼层按页码/楼层顺序导入，不以 PID 字符串排序",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [
+           {"pid": "910001009", "content": "[收录]\n[标题] 三号\n[作者] 作者丙\n[标签] 标签丙\n\n正文三。"},
+           {"pid": "910001002", "content": "[收录]\n[标题] 一号\n[作者] 作者甲\n[标签] 标签甲\n\n正文一。"},
+           {"pid": "910001005", "content": "[收录]\n[标题] 二号\n[作者] 作者乙\n[标签] 标签乙\n\n正文二。"}
+         ]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173",
+                   "import:910001009", "import:910001002", "import:910001005"],
+        "counts": {"new_floor_count": 3, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 3, "imported_count": 3},
+        "inbox_items": [
+          {"pid": "910001009", "status": "candidate"},
+          {"pid": "910001002", "status": "candidate"},
+          {"pid": "910001005", "status": "candidate"}
+        ],
+        "state_floors": {
+          "910001009": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false},
+          "910001002": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false},
+          "910001005": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}
+        },
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S11",
+      "category": "encoding",
+      "purpose": "CRLF 行尾仍能识别独立 [收录] 行 → candidate",
+      "basis": "docs/11 §6；触发行按行切分",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001011", "content": "[收录]\r\n[标题] 标题甲\r\n[作者] 作者甲\r\n[标签] 标签甲\r\n\r\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001011"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001011", "status": "candidate"}],
+        "state_floors": {"910001011": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S12",
+      "category": "encoding",
+      "purpose": "中文全角标点标题/标签正常解析 → candidate",
+      "basis": "docs/11 §8",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001012", "content": "[收录]\n[标题] 《全角标题》——副标题！\n[作者] 作者甲\n[标签] 标签甲，标签乙\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001012"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001012", "status": "candidate"}],
+        "state_floors": {"910001012": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S13",
+      "category": "encoding",
+      "purpose": "正文行内 [术语]注释 保留在正文（行内非字段行）→ candidate",
+      "basis": "docs/11 §8",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001013", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文[术语]注释的内容。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001013"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001013", "status": "candidate"}],
+        "state_floors": {"910001013": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S14",
+      "category": "encoding",
+      "purpose": "末尾独立注释行（[注] 行）按未知字段保留，不影响候选判定",
+      "basis": "docs/11 §8",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001014", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。\n[注] 末尾注释"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001014"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001014", "status": "candidate"}],
+        "state_floors": {"910001014": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S15",
+      "category": "ubb",
+      "purpose": "颜色/UBB 已知标签剥离不影响候选判定；原始片段作为 raw 保留",
+      "basis": "docs/11 §8",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001015",
+                     "content": "[收录]\n[标题] 色彩标题\n[作者] 作者乙\n[标签] 标签乙\n\n[color=red]红色文字[/color]与[b]加粗[/b]。原始片段应保留。",
+                     "content_text": "[收录]\n[标题] 色彩标题\n[作者] 作者乙\n[标签] 标签乙\n\n红色文字与加粗。原始片段应保留。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001015"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001015", "status": "candidate"}],
+        "draft_contains": ["[color=red]"],
+        "state_floors": {"910001015": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false,
+                                        "imported_content_sha256": "same"}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S16",
+      "category": "pagination",
+      "purpose": "第一页在计划内时复用已读结果，只 fetch 一次",
+      "basis": "docs/11 §5",
+      "state": {"last_page": 1, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 1, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001016", "content": "[收录]\n[标题] 首页稿\n[作者] 作者甲\n[标签] 标签甲\n\n正文。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "import:910001016"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001016", "status": "candidate"}],
+        "state_floors": {"910001016": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 1,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S17",
+      "category": "pagination",
+      "purpose": "173→174 新页：计划页之间每次导航 sleep 3.0",
+      "basis": "docs/11 §5",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 174, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 174, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 174, "last_page": 174, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001017", "content": "[收录]\n[标题] 新页稿\n[作者] 作者甲\n[标签] 标签甲\n\n正文。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "sleep:3.0", "fetch:174", "import:910001017"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001017", "status": "candidate"}],
+        "state_floors": {"910001017": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 174,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S18",
+      "category": "pagination",
+      "purpose": "分页倒退（last_page 变小）→ thread_page_regressed，不推进",
+      "basis": "docs/11 §5",
+      "state": {"last_page": 174, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 174,
+        "error": "thread_page_regressed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S19",
+      "category": "pagination",
+      "purpose": "超过 max_scan_pages → scan_range_too_large，不推进",
+      "basis": "docs/11 §5",
+      "max_scan_pages": 12,
+      "state": {"last_page": 1, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 20, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 1,
+        "error": "scan_range_too_large",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S20",
+      "category": "pagination",
+      "purpose": "空页（计划页无楼层）→ 成功，计数全 0",
+      "basis": "docs/11 §5",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S21",
+      "category": "pagination",
+      "purpose": "结构未知（floor_structure_unrecognized）→ page_fetch_failed，不推进",
+      "basis": "docs/11 §9；fail closed",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": ["floor_structure_unrecognized"], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S22",
+      "category": "pagination",
+      "purpose": "跨页同 PID 同内容 → 合并为一个楼层，记 duplicate_pid_across_pages 诊断",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 174, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 174, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001022", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]},
+        {"page": 174, "last_page": 174, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001022", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "sleep:3.0", "fetch:174", "import:910001022"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001022", "status": "candidate"}],
+        "diagnostics_contains": ["duplicate_pid_across_pages"],
+        "state_floors": {"910001022": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 174,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S23",
+      "category": "pagination",
+      "purpose": "跨页同 PID 不同内容 → duplicate_pid_across_pages 阻断",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 174, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 174, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001023", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]},
+        {"page": 174, "last_page": 174, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001023", "content": "[收录]\n[标题] 标题乙\n[作者] 作者乙\n[标签] 标签乙\n\n正文乙。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "sleep:3.0", "fetch:174"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "duplicate_pid_across_pages",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S24",
+      "category": "incremental",
+      "purpose": "首次新增触发稿 → import 并绑定 inbox_item_id、imported_content_sha256==content_sha256",
+      "basis": "docs/11 §6",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001024", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001024"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001024", "status": "candidate"}],
+        "state_floors": {"910001024": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false,
+                                        "imported_content_sha256": "same"}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S25",
+      "category": "incremental",
+      "purpose": "重复扫描内容未变 → unchanged，不重复导入，Inbox 不增加",
+      "basis": "docs/11 §6",
+      "state": {"last_page": 173, "known_floors": {
+        "910001025": {"content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。",
+                      "trigger_found": true, "inbox_item_id": 1, "imported": true, "changed_after_import": false}
+      }},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001025", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 1, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "state_floors": {"910001025": {"trigger_found": true, "inbox_item_id": 1, "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S26",
+      "category": "incremental",
+      "purpose": "已知讨论楼层后来补上 [收录] → 按新投稿导入",
+      "basis": "docs/11 §6",
+      "state": {"last_page": 173, "known_floors": {
+        "910001026": {"content": "普通讨论内容", "trigger_found": false, "inbox_item_id": null,
+                      "imported": false, "changed_after_import": false}
+      }},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001026", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001026"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 0, "changed_floor_count": 1,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001026", "status": "candidate"}],
+        "state_floors": {"910001026": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S27",
+      "category": "incremental",
+      "purpose": "已入队楼层移除触发（改成普通内容）→ 只报 changed_after_import，不重新导入、不覆盖",
+      "basis": "docs/11 §6/§7",
+      "state": {"last_page": 173, "known_floors": {
+        "910001027": {"content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。",
+                      "trigger_found": true, "inbox_item_id": 1, "imported": true, "changed_after_import": false}
+      }},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001027", "content": "普通讨论内容（已移除收录）"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 0, "changed_floor_count": 1,
+                   "discussion_count": 0, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "changed_after_import": [1],
+        "diagnostics_contains": ["floor_changed_after_import"],
+        "state_floors": {"910001027": {"trigger_found": true, "inbox_item_id": 1, "changed_after_import": true}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S28",
+      "category": "incremental",
+      "purpose": "已入队楼层正文小改 → changed_after_import，不覆盖人工审核内容",
+      "basis": "docs/11 §6",
+      "state": {"last_page": 173, "known_floors": {
+        "910001028": {"content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。",
+                      "trigger_found": true, "inbox_item_id": 1, "imported": true, "changed_after_import": false}
+      }},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001028", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲（小改）。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 0, "changed_floor_count": 1,
+                   "discussion_count": 0, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "changed_after_import": [1],
+        "state_floors": {"910001028": {"trigger_found": true, "inbox_item_id": 1, "changed_after_import": true}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S29",
+      "category": "incremental",
+      "purpose": "同正文不同来源（不同 PID 两楼层）→ 各自导入，不自动合并判重",
+      "basis": "docs/13 已知限制；不自动合并",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [
+           {"pid": "910001029", "content": "[收录]\n[标题] 同名稿\n[作者] 作者甲\n[标签] 标签甲\n\n同一正文。"},
+           {"pid": "910001030", "content": "[收录]\n[标题] 同名稿\n[作者] 作者甲\n[标签] 标签甲\n\n同一正文。"}
+         ]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001029", "import:910001030"],
+        "counts": {"new_floor_count": 2, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 2, "imported_count": 2},
+        "inbox_items": [
+          {"pid": "910001029", "status": "candidate"},
+          {"pid": "910001030", "status": "candidate"}
+        ],
+        "state_floors": {
+          "910001029": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false},
+          "910001030": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}
+        },
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S30",
+      "category": "incremental",
+      "purpose": "同 PID 换成另一篇完全不同的稿 → changed_after_import（幂等 ≠ 判重，不自动合并/覆盖）",
+      "basis": "docs/11 §6/§7",
+      "state": {"last_page": 173, "known_floors": {
+        "910001030": {"content": "[收录]\n[标题] 旧标题\n[作者] 旧作者\n[标签] 旧标签\n\n旧正文。",
+                      "trigger_found": true, "inbox_item_id": 1, "imported": true, "changed_after_import": false}
+      }},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001030", "content": "[收录]\n[标题] 新标题\n[作者] 新作者\n[标签] 新标签\n\n全新正文。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173"],
+        "counts": {"new_floor_count": 0, "unchanged_floor_count": 0, "changed_floor_count": 1,
+                   "discussion_count": 0, "triggered_count": 0, "imported_count": 0},
+        "inbox_items": [],
+        "changed_after_import": [1],
+        "state_floors": {"910001030": {"trigger_found": true, "inbox_item_id": 1, "changed_after_import": true}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S31",
+      "category": "login",
+      "purpose": "官方登录跳转 → 等待确认 → 只重试第一页一次，成功后继续计划页",
+      "basis": "docs/12 §3；F1/F2",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": ["manual_login_required"], "floors": [],
+         "retry": {"last_page": 173, "status": 200, "diagnostics": [], "floors": []}},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001031", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "confirm": true,
+      "expected": {
+        "events": ["fetch:1", "confirm", "sleep:3.0", "fetch:1", "sleep:3.0", "fetch:173", "import:910001031"],
+        "counts": {"new_floor_count": 1, "unchanged_floor_count": 0, "changed_floor_count": 0,
+                   "discussion_count": 0, "triggered_count": 1, "imported_count": 1},
+        "inbox_items": [{"pid": "910001031", "status": "candidate"}],
+        "state_floors": {"910001031": {"trigger_found": true, "inbox_item_id": "set", "changed_after_import": false}},
+        "last_page_after": 173,
+        "error": null,
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S32",
+      "category": "login",
+      "purpose": "登录等待超时 → login_not_confirmed，session 恰好关闭一次",
+      "basis": "docs/12 §3",
+      "state": {"last_page": 173, "known_floors": {}},
+      "login_wait_timeout": 0.5,
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": ["manual_login_required"], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "login_not_confirmed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S33",
+      "category": "login",
+      "purpose": "确认后重试仍登录页 → login_required，无第三次请求，重试前有 sleep",
+      "basis": "docs/12 §3",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": ["manual_login_required"], "floors": [],
+         "retry": {"last_page": 173, "status": 200, "diagnostics": ["manual_login_required"], "floors": []}}
+      ],
+      "confirm": true,
+      "expected": {
+        "events": ["fetch:1", "confirm", "sleep:3.0", "fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "login_required",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S34",
+      "category": "login",
+      "purpose": "外站重定向 → unexpected_redirect（fetch 层在写快照前阻断）",
+      "basis": "docs/13 §2",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "fetch_error": {"code": "unexpected_redirect"}}
+      ],
+      "expected": {
+        "events": [],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "unexpected_redirect",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S35",
+      "category": "response",
+      "purpose": "403 → thread_forbidden → page_fetch_failed，不推进",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 403, "diagnostics": ["thread_forbidden"], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S36",
+      "category": "response",
+      "purpose": "404 → thread_not_found → page_fetch_failed，不推进",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 404, "diagnostics": ["thread_not_found"], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S37",
+      "category": "response",
+      "purpose": "验证码页 → captcha_or_challenge → page_fetch_failed，不推进",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": ["captcha_or_challenge"], "floors": []}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S38",
+      "category": "failure",
+      "purpose": "expected_state_sha256 与磁盘不符 → watcher_state_stale，未开 session/未 fetch/未建 Inbox",
+      "basis": "docs/13 §4",
+      "state": {"last_page": 173, "known_floors": {}},
+      "expected_state_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": [],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "watcher_state_stale",
+        "session_close": 0
+      }
+    },
+    {
+      "scenario_id": "S39",
+      "category": "failure",
+      "purpose": "state .lock 已被占用 → watcher_locked，未联网/未导入",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pre_lock": true,
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": [],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "watcher_locked",
+        "session_close": 0
+      }
+    },
+    {
+      "scenario_id": "S40",
+      "category": "failure",
+      "purpose": "第一页返回后取消 → watcher_shutdown，不 fetch 下一页、不推进",
+      "basis": "docs/13 §5",
+      "state": {"last_page": 173, "known_floors": {}},
+      "cancel": {"after_fetch": 1},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001040", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "watcher_shutdown",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S41",
+      "category": "failure",
+      "purpose": "导航 sleep 期间取消 → 后续 fetch 前可见，watcher_shutdown",
+      "basis": "docs/13 §5；W1-6 修复",
+      "state": {"last_page": 173, "known_floors": {}},
+      "cancel": {"during_sleep": 1},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001041", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "watcher_shutdown",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S42",
+      "category": "failure",
+      "purpose": "session 创建失败 → 原错误传播，不推进 Inbox/state",
+      "basis": "docs/11 §9；fail closed",
+      "state": {"last_page": 173, "known_floors": {}},
+      "session_error": {"code": "page_fetch_failed"},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []}
+      ],
+      "expected": {
+        "events": [],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 0
+      }
+    },
+    {
+      "scenario_id": "S43",
+      "category": "failure",
+      "purpose": "计划页读取失败 → page_fetch_failed，state/Inbox 不推进",
+      "basis": "docs/11 §9",
+      "state": {"last_page": 173, "known_floors": {}},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "fetch_error": {"code": "page_fetch_failed"}}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0"],
+        "counts": null,
+        "inbox_items": [],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "page_fetch_failed",
+        "session_close": 1
+      }
+    },
+    {
+      "scenario_id": "S44",
+      "category": "failure",
+      "purpose": "import 已提交后 state 原子写入失败 → 如实 partial：Inbox 有 1 项、state 不变、报 watcher_partial_import",
+      "basis": "docs/11 §9；W4 partial 语义",
+      "state": {"last_page": 173, "known_floors": {}},
+      "inject": {"atomic_write_fails": true},
+      "pages": [
+        {"page": 1, "last_page": 173, "status": 200, "diagnostics": [], "floors": []},
+        {"page": 173, "last_page": 173, "status": 200, "diagnostics": [],
+         "floors": [{"pid": "910001044", "content": "[收录]\n[标题] 标题甲\n[作者] 作者甲\n[标签] 标签甲\n\n正文甲。"}]}
+      ],
+      "expected": {
+        "events": ["fetch:1", "sleep:3.0", "fetch:173", "import:910001044"],
+        "counts": null,
+        "inbox_items": [{"pid": "910001044", "status": "candidate"}],
+        "state_floors": {},
+        "last_page_after": 173,
+        "error": "watcher_partial_import",
+        "session_close": 1
+      }
+    }
+  ]
+}

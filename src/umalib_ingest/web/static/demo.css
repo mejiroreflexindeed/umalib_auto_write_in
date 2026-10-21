@@ -1,0 +1,111 @@
+/* TASK-013 Demo 引导式 UI 样式（延续 Win7 浅蓝/灰蓝面板风格，无 CDN/图片/框架） */
+
+#demo-app {
+  margin: 8px;
+  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+}
+
+#demo-title-bar {
+  background: linear-gradient(#cfe8ff, #9cc8f0);
+  border: 1px solid #7ea6cc;
+  padding: 8px 12px;
+  font-weight: bold;
+  color: #1f3d5c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#demo-title-bar .demo-ws {
+  font-weight: normal;
+  color: #35506b;
+}
+
+#demo-nav button {
+  min-width: 96px;
+  margin-right: 4px;
+}
+
+#demo-nav button.active {
+  background: #e3effa;
+  border-color: #4a7cb0;
+}
+
+.demo-section {
+  background: #f3f7fb;
+  border: 1px solid #b7c9da;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.demo-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.demo-card {
+  background: #ffffff;
+  border: 1px solid #c3d3e2;
+  padding: 8px;
+  width: 300px;
+}
+
+.demo-fixed-actions {
+  position: sticky;
+  bottom: 0;
+  background: #eef4fa;
+  border-top: 1px solid #b7c9da;
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+
+.demo-step {
+  color: #4a6584;
+  margin-right: 8px;
+}
+
+.demo-warn {
+  color: #a06000;
+}
+
+.demo-error {
+  color: #a02020;
+}
+
+.demo-ok {
+  color: #1e7a1e;
+}
+
+.demo-muted {
+  color: #6b7f94;
+}
+
+.demo-candidate-row.latest {
+  background: #e7f3e7;
+  font-weight: bold;
+}
+
+table.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.demo-table td,
+table.demo-table th {
+  border: 1px solid #c3d3e2;
+  padding: 4px 6px;
+  text-align: left;
+}
+
+.demo-hidden {
+  display: none;
+}
+
+#demo-detail-preview {
+  background: #fafcfd;
+  border: 1px dashed #9db8ce;
+  padding: 8px;
+  margin: 6px 0;
+  min-height: 40px;
+}

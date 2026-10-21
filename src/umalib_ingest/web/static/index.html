@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投稿审核台</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/demo.css">
+</head>
+<body>
+<header id="title-bar">
+  <span id="app-icon" class="app-icon">审</span>
+  <h1>投稿审核台</h1>
+  <span id="title-status" class="muted">仅本机 · 127.0.0.1</span>
+</header>
+
+<nav id="command-bar">
+  <div class="command-group">
+    <label for="import-url">NGA 楼层 URL（可选）</label>
+    <input id="import-url" type="text" placeholder="https://bbs.nga.cn/read.php?tid=...">
+    <label for="import-raw">原始楼层文本</label>
+    <textarea id="import-raw" rows="3" placeholder="粘贴完整楼层原文，包含 [收录] 标记"></textarea>
+    <button id="import-btn" type="button">导入 Inbox</button>
+  </div>
+  <div id="import-message" class="message"></div>
+</nav>
+
+<main>
+  <section class="panel" id="watcher-panel">
+    <h2>扫描 NGA（固定 tid=30099686）</h2>
+    <p id="wch-config" class="muted">正在读取 Watcher 配置…</p>
+    <div class="filters">
+      <button id="wch-refresh-btn" type="button">刷新状态</button>
+      <span id="wch-status" class="muted"></span>
+    </div>
+    <div class="actions">
+      <button id="wch-dryrun-btn" type="button">只检查，不导入（dry-run）</button>
+      <button id="wch-scan-btn" type="button">扫描并加入当前 Inbox</button>
+    </div>
+    <div class="w-confirm">
+      <input id="wch-confirm-import" type="checkbox">
+      <label for="wch-confirm-import">我确认把本次发现的投稿加入当前 Inbox，并推进扫描状态</label>
+    </div>
+    <div id="wch-scan-state" class="message"></div>
+    <div id="wch-login-wait" class="message" hidden>
+      <span class="severity-warning">检测到需要登录：请在已打开的官方 NGA 页面完成登录。</span>
+      <button id="wch-login-confirm-btn" type="button">我已在官方 NGA 页面完成登录，重试一次</button>
+    </div>
+    <div id="wch-result" class="message"></div>
+  </section>
+
+  <section class="panel" id="list-panel">
+    <h2>Inbox 列表</h2>
+    <div class="filters">
+      <label for="status-filter">状态筛选</label>
+      <select id="status-filter">
+        <option value="">全部</option>
+        <option value="candidate">candidate</option>
+        <option value="incomplete">incomplete</option>
+        <option value="suspected_duplicate">suspected_duplicate</option>
+        <option value="approved">approved</option>
+        <option value="exported">exported</option>
+        <option value="ignored">ignored</option>
+      </select>
+      <label for="search-input">本地搜索</label>
+      <input id="search-input" type="text" placeholder="按标题/作者搜索（本地）">
+    </div>
+    <div class="table-wrap">
+      <table id="items-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>状态</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>缺失字段</th>
+            <th>更新时间</th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+      </table>
+    </div>
+    <div id="list-message" class="message"></div>
+  </section>
+
+  <section class="panel" id="detail-panel" hidden>
+    <h2>审核详情 <span id="detail-id" class="muted"></span></h2>
+    <div id="readonly-notice" class="message" hidden>
+        该记录已锁定，只能查看。approved/ignored 可通过下方“改变状态”填写原因后退回；exported 是终态，不能再转换。
+    </div>
+    <div class="detail-grid">
+      <div>
+        <label for="f-title">标题</label>
+        <input id="f-title" type="text">
+        <label for="f-author">作者</label>
+        <input id="f-author" type="text">
+        <label for="f-translator">译者</label>
+        <input id="f-translator" type="text">
+        <label for="f-series">系列</label>
+        <input id="f-series" type="text">
+        <label for="f-tags">标签（一行一个）</label>
+        <textarea id="f-tags" rows="4"></textarea>
+      </div>
+      <div>
+        <label for="f-nga">NGA 来源（一行一个）</label>
+        <textarea id="f-nga" rows="2"></textarea>
+        <label for="f-original-series">原作系列（一行一个）</label>
+        <textarea id="f-original-series" rows="2"></textarea>
+        <label for="f-original">原作（一行一个）</label>
+        <textarea id="f-original" rows="2"></textarea>
+        <label for="f-translation-series">译作系列（一行一个）</label>
+        <textarea id="f-translation-series" rows="2"></textarea>
+        <label for="f-translation">译作（一行一个）</label>
+        <textarea id="f-translation" rows="2"></textarea>
+      </div>
+      <div>
+        <label for="f-body">正文（逐字编辑）</label>
+        <textarea id="f-body" rows="10"></textarea>
+        <label for="f-raw">原始楼层（只读）</label>
+        <pre id="f-raw" class="raw-box"></pre>
+      </div>
+      <div>
+        <h3>诊断</h3>
+        <p id="d-missing" class="muted"></p>
+        <h4>warnings</h4>
+        <ul id="d-warnings"></ul>
+        <h4>unknown_fields</h4>
+        <ul id="d-unknown"></ul>
+        <h4>raw_fields</h4>
+        <ul id="d-rawfields"></ul>
+        <h4>精确正文重复候选</h4>
+        <ul id="d-duplicates"></ul>
+        <h4>状态历史</h4>
+        <ul id="d-history"></ul>
+        <h4>批准交接包</h4>
+        <p id="pkg-status" class="muted">批准后可生成</p>
+        <p id="pkg-sha" class="muted"></p>
+        <pre id="pkg-json" class="raw-box" hidden></pre>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="save-btn" type="button">保存修改</button>
+      <button id="discard-btn" type="button" hidden>放弃未保存修改</button>
+    </div>
+    <div id="dirty-message" class="message"></div>
+    <div id="detail-message" class="message"></div>
+
+    <div class="panel-inner" id="writer-panel" hidden>
+      <h3>生成大书库候选</h3>
+      <p id="w-config" class="muted">正在读取 Writer 配置…</p>
+      <div class="w-row">
+        <button id="w-catalog-btn" type="button">重新加载标签目录</button>
+        <span id="w-catalog-summary" class="muted"></span>
+      </div>
+      <div class="w-grid">
+        <div>
+          <label for="w-candidate-file">候选文件名（只写文件，不覆盖已有）</label>
+          <input id="w-candidate-file" type="text">
+        </div>
+        <div>
+          <label for="w-upload-time">上传时间（本地时间，需人工填写）</label>
+          <input id="w-upload-time" type="datetime-local">
+          <span id="w-upload-seconds" class="muted"></span>
+        </div>
+        <div>
+          <label for="w-note">备注</label>
+          <input id="w-note" type="text">
+        </div>
+      </div>
+      <div class="w-sources">
+        <label for="w-source-available">来源顺序（人工选择，逐条加入）</label>
+        <div class="filters">
+          <select id="w-source-available"></select>
+          <button id="w-source-add-btn" type="button">加入已选</button>
+        </div>
+        <ol id="w-source-selected"></ol>
+      </div>
+      <div class="w-tags">
+        <label>标签 / 系列决策（多重同名必须选 ID；零匹配需选新类型或现有 ID）</label>
+        <div id="w-tag-decisions"></div>
+      </div>
+      <div class="actions">
+        <button id="w-preview-btn" type="button">生成 dry-run 预览</button>
+      </div>
+      <div id="w-plan-message" class="message"></div>
+      <div id="w-plan-diagnostics" class="message"></div>
+      <div id="w-preview-diagnostics" class="message"></div>
+      <div id="w-operations" class="message"></div>
+      <div id="w-hashes" class="muted"></div>
+      <div class="w-confirm">
+        <input id="w-close-confirmed" type="checkbox" disabled>
+        <label for="w-close-confirmed">我已关闭大书库，确认只生成新的候选副本</label>
+      </div>
+      <div class="actions">
+        <button id="w-write-btn" type="button" disabled>生成候选数据库</button>
+      </div>
+      <div id="w-write-message" class="message"></div>
+    </div>
+
+    <div id="w-result" class="message"></div>
+
+    <div class="panel-inner">
+      <h3>改变状态</h3>
+      <div class="filters">
+        <label for="target-status">目标状态</label>
+        <select id="target-status">
+          <option value="candidate">candidate</option>
+          <option value="incomplete">incomplete</option>
+          <option value="suspected_duplicate">suspected_duplicate</option>
+          <option value="approved">approved</option>
+          <option value="ignored">ignored</option>
+        </select>
+        <label for="transition-reason">原因（必填）</label>
+        <input id="transition-reason" type="text">
+        <button id="transition-btn" type="button">改变状态</button>
+      </div>
+      <div id="transition-message" class="message"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="status-bar">
+  <span id="status-local">仅本机 · 127.0.0.1</span>
+  <span id="status-writer">Writer 未配置</span>
+  <span id="status-dirty"></span>
+  <span id="status-selected" class="muted"></span>
+</footer>
+<script src="/app.js"></script>
+<script src="/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+# Local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+*.pyd
+*.bak
+*.pem
+*.key
+*.pfx
+*.p12
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Build and packaging outputs
+build/
+dist/
+*.egg-info/
+*.zip
+*.7z
+*.rar
+
+# Runtime databases and state
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite-wal
+*.sqlite-shm
+*.lock
+*.tmp
+
+# Credentials, local configuration, and browser profiles
+.env
+.env.*
+!.env.example
+*profile*/
+*cookies*/
+*storage-state*.json
+
+# Test and acceptance artifacts
+artifacts/
+evidence/
+screenshots/
+test-results/
+playwright-report/
+reports/
+*.log
+
+# Machine-specific launchers and internal handoff material
+*.lnk
+/AGENTS.md
+/tasks/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

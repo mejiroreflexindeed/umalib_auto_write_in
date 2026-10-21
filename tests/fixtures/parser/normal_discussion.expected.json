@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "parser_status": "ignored",
+  "origin": {
+    "platform": "nga",
+    "thread_id": null,
+    "post_id": null,
+    "floor": null,
+    "canonical_url": null
+  },
+  "trigger": {
+    "found": false,
+    "marker": null
+  },
+  "metadata": {
+    "title": null,
+    "author": null,
+    "translator": null,
+    "series": null,
+    "tags": [],
+    "sources": {
+      "nga": [],
+      "original_series": [],
+      "original": [],
+      "translation_series": [],
+      "translation": []
+    }
+  },
+  "content": {
+    "raw_text": "大家好，这是一条普通讨论。\n没有任何投稿标记。\n\n",
+    "body_text": "大家好，这是一条普通讨论。\n没有任何投稿标记。"
+  },
+  "raw_fields": {},
+  "diagnostics": {
+    "missing_fields": [],
+    "warnings": [],
+    "unknown_fields": []
+  }
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "umalib-ingest"
+version = "0.0.0"
+description = "Local deterministic ingestion companion for Uma Library"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+nga = ["playwright==1.62.0"]
+
+[project.scripts]
+umalib-demo = "umalib_ingest.demo.__main__:main"
+nga-probe = "umalib_ingest.nga_access.__main__:probe_main"
+nga-inspect-snapshot = "umalib_ingest.nga_access.__main__:inspect_snapshot_main"
+nga-watch = "umalib_ingest.watcher.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"umalib_ingest.web" = ["static/*"]
+"umalib_ingest.demo" = ["assets/*"]

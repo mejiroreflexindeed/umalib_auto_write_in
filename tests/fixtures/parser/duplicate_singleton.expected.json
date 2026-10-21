@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "parser_status": "accepted",
+  "origin": {
+    "platform": "nga",
+    "thread_id": null,
+    "post_id": null,
+    "floor": null,
+    "canonical_url": null
+  },
+  "trigger": {
+    "found": true,
+    "marker": "收录"
+  },
+  "metadata": {
+    "title": "第一标题",
+    "author": "作者甲/作者乙",
+    "translator": null,
+    "series": null,
+    "tags": ["角色", "短篇"],
+    "sources": {
+      "nga": [],
+      "original_series": [],
+      "original": [],
+      "translation_series": [],
+      "translation": []
+    }
+  },
+  "content": {
+    "raw_text": "[收录]\n[标题] 第一标题\n[标题] 第二标题\n[作者] 作者甲/作者乙\n[标签] 角色, 角色，短篇\n[未来字段] 暂未支持但必须保留\n\n正文。\n\n",
+    "body_text": "正文。"
+  },
+  "raw_fields": {
+    "标题": ["第一标题", "第二标题"],
+    "作者": ["作者甲/作者乙"],
+    "标签": ["角色, 角色，短篇"],
+    "未来字段": ["暂未支持但必须保留"]
+  },
+  "diagnostics": {
+    "missing_fields": [],
+    "warnings": [
+      {
+        "code": "duplicate_field",
+        "message": "单值字段 标题 重复，保留第一个非空值",
+        "field": "标题",
+        "line": 3
+      }
+    ],
+    "unknown_fields": [
+      {
+        "name": "未来字段",
+        "value": "暂未支持但必须保留",
+        "line": 6
+      }
+    ]
+  }
+}

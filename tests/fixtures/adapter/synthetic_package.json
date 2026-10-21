@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "inbox": {
+    "item_id": 1,
+    "status": "approved",
+    "snapshot_sha256": "abababababababababababababababababababababababababababababababab",
+    "content_sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+    "created_at": "2026-01-01T00:00:00+00:00",
+    "approved_at": "2026-01-02T00:00:00+00:00"
+  },
+  "submission": {
+    "schema_version": "1.0",
+    "parser_status": "accepted",
+    "origin": {
+      "platform": "nga",
+      "thread_id": null,
+      "post_id": null,
+      "floor": null,
+      "canonical_url": null
+    },
+    "trigger": {"found": true, "marker": "收录"},
+    "metadata": {
+      "title": "合成投稿标题",
+      "author": "合成作者",
+      "translator": null,
+      "series": "合成系列乙",
+      "tags": ["合成角色甲", "合成重复标签"],
+      "sources": {
+        "nga": [],
+        "original_series": ["https://example.com/os-1"],
+        "original": ["https://example.com/original-1"],
+        "translation_series": ["https://example.com/ts-1"],
+        "translation": ["https://example.com/translation-1"]
+      }
+    },
+    "content": {
+      "raw_text": "合成原始楼层文本",
+      "body_text": "第一行\n\n[关键词]注释\n"
+    },
+    "raw_fields": {},
+    "diagnostics": {"missing_fields": [], "warnings": [], "unknown_fields": []}
+  }
+}

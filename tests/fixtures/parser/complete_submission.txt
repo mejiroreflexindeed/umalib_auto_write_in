@@ -1,0 +1,16 @@
+[收录]
+[标题] 星光下的测试稿
+[作者] 测试作者
+[译者] 测试译者
+[系列] 测试系列
+[标签] 角色, 翻译、短篇
+[原作系列] example.com/original-series
+[原作] https://example.com/original
+[译作系列] example.com/translation-series
+[译作] https://bbs.nga.cn/read.php?tid=1&pid=2&to=1
+
+正文第一段。
+正文中的[术语]需要保留。
+
+[术语]这是注释
+

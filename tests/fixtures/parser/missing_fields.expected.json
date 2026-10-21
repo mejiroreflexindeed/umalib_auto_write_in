@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "parser_status": "accepted",
+  "origin": {
+    "platform": "nga",
+    "thread_id": null,
+    "post_id": null,
+    "floor": null,
+    "canonical_url": null
+  },
+  "trigger": {
+    "found": true,
+    "marker": "收录"
+  },
+  "metadata": {
+    "title": null,
+    "author": null,
+    "translator": null,
+    "series": null,
+    "tags": [],
+    "sources": {
+      "nga": [],
+      "original_series": [],
+      "original": [],
+      "translation_series": [],
+      "translation": []
+    }
+  },
+  "content": {
+    "raw_text": "[收录]\n[标题]\n\n只有正文，其他信息稍后人工补充。\n\n",
+    "body_text": "只有正文，其他信息稍后人工补充。"
+  },
+  "raw_fields": {
+    "标题": [""]
+  },
+  "diagnostics": {
+    "missing_fields": ["title", "author", "tags"],
+    "warnings": [
+      {
+        "code": "empty_field",
+        "message": "字段 标题 的值为空",
+        "field": "标题",
+        "line": 2
+      }
+    ],
+    "unknown_fields": []
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.umalib-ingest.invalid/contracts/umalib-change-plan.schema.json",
+  "title": "UmaLibChangePlan",
+  "description": "Pure, previewable, hashable change plan produced by the UmaLib Adapter core. It is never executable SQL and never a database write; ready=true only means the Adapter-level human choices are complete.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "input", "ready", "article", "tags", "diagnostics", "plan_sha256"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "package_sha256",
+        "target_database_sha256",
+        "target_schema_fingerprint_sha256",
+        "target_tag_catalog_sha256"
+      ],
+      "properties": {
+        "item_id": { "type": "integer", "minimum": 1 },
+        "package_sha256": { "$ref": "#/$defs/sha256" },
+        "target_database_sha256": { "$ref": "#/$defs/sha256" },
+        "target_schema_fingerprint_sha256": { "$ref": "#/$defs/sha256" },
+        "target_tag_catalog_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "ready": { "type": "boolean" },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "note", "content", "author", "translator", "upload_time", "source"],
+      "properties": {
+        "name": { "type": ["string", "null"] },
+        "note": { "type": ["string", "null"] },
+        "content": { "type": "string" },
+        "author": { "type": ["string", "null"] },
+        "translator": { "type": ["string", "null"] },
+        "upload_time": { "type": "integer", "minimum": 0 },
+        "source": { "type": "string" }
+      }
+    },
+    "tags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["existing", "create"],
+      "properties": {
+        "existing": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/existingTag" }
+        },
+        "create": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/newTag" }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockers", "warnings"],
+      "properties": {
+        "blockers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        }
+      }
+    },
+    "plan_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "existingTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": { "type": "integer", "minimum": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "newTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "field", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "field": { "type": "string" },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

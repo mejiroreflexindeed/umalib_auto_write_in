@@ -1,0 +1,14 @@
+{
+  "data": {
+    "__PAGE": 1,
+    "__ROWS": 3460,
+    "__R__ROWS": 20,
+    "__R__ROWS_PAGE": 20,
+    "__T": {"tid": 30099686, "fid": -63708427},
+    "__R": [
+      {"pid": 888000001, "lou": 1, "authorid": 10000001, "postdate": "2026-08-01 10:05", "content": "[b]合成正文一[/b]，含[术语]注释。"},
+      {"pid": 888000002, "lou": 2, "authorid": 10000002, "postdate": "2026-08-01 10:10", "content": "[color=#C00000]颜色标记[/color]与[url=https://bbs.nga.cn/read.php?tid=99999999]链接[/url]。"}
+    ]
+  },
+  "time": 1700000000
+}

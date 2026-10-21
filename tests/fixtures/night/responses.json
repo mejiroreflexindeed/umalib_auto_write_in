@@ -1,0 +1,25 @@
+{
+  "bodies": {
+    "submission": "<title>测试帖</title><script>var __PAGE={1:1,2:1};</script><tr id='post1strow1'><a id='pid910009101Anchor'></a><a id='postauthor1'>测试作者</a><span id='postdate1'>2026-09-02</span><span id='postcontent1'>[收录]\n[标题] 响应测试稿\n[作者] 测试作者\n[标签] 测试标签\n\n[color=red]有意义的颜色[/color]\n[术语]注释保留。</span></tr>",
+    "discussion": "<script>var __PAGE={1:1,2:1};</script><tr id='post1strow1'><a id='pid910009101Anchor'></a><span id='postcontent1'>普通讨论。</span></tr>",
+    "incomplete": "<script>var __PAGE={1:1,2:1};</script><tr id='post1strow1'><a id='pid910009101Anchor'></a><span id='postcontent1'>[收录]\n[标题] 信息待补\n\n正文。</span></tr>",
+    "login": "<title>登录 NGA</title><p>请登录</p>",
+    "unknown": "<title>维护页面</title><p>稍后再试</p>",
+    "captcha": "<title>验证</title><p>请完成安全验证</p>"
+  },
+  "scenarios": [
+    {"id":"H01","purpose":"UTF-8 投稿完整链和原始颜色注释","responses":[{"body":"submission"}],"expected":{"error":null,"status":"candidate","events":["fetch:1","import:910009101"],"raw_contains":["[color=red]","[术语]注释保留。"],"body_contains":["[术语]注释保留。"],"body_snapshots":true}},
+    {"id":"H02","purpose":"GB18030 声明编码","responses":[{"body":"submission","encoding":"gb18030","charset":"gbk"}],"expected":{"error":null,"status":"candidate","events":["fetch:1","import:910009101"],"raw_contains":["有意义的颜色"],"body_snapshots":true}},
+    {"id":"H03","purpose":"GB18030 无 charset 回退","responses":[{"body":"submission","encoding":"gb18030","charset":""}],"expected":{"error":null,"status":"candidate","events":["fetch:1","import:910009101"],"body_snapshots":true}},
+    {"id":"H04","purpose":"普通讨论忽略","responses":[{"body":"discussion"}],"expected":{"error":null,"status":null,"events":["fetch:1"],"body_snapshots":true}},
+    {"id":"H05","purpose":"缺字段入队待补","responses":[{"body":"incomplete"}],"expected":{"error":null,"status":"incomplete","events":["fetch:1","import:910009101"],"body_snapshots":true}},
+    {"id":"H06","purpose":"非许可域登录重定向阻断","responses":[{"body":"login","url":"https://example.invalid/login.php"},{"body":"submission"}],"expected":{"error":"unexpected_redirect","status":null,"events":["fetch:1"],"body_snapshots":false}},
+    {"id":"H07","purpose":"官方 NGA 登录后一次重试","responses":[{"body":"login","url":"https://bbs.nga.cn/nuke.php?func=login"},{"body":"submission"}],"expected":{"error":null,"status":"candidate","events":["fetch:1","confirm","sleep:3.0","fetch:1","import:910009101"],"body_snapshots":true}},
+    {"id":"H08","purpose":"登录确认后仍失败不循环","responses":[{"body":"login","url":"https://bbs.nga.cn/login.php"},{"body":"login","url":"https://bbs.nga.cn/login.php"}],"expected":{"error":"login_required","status":null,"events":["fetch:1","confirm","sleep:3.0","fetch:1"],"body_snapshots":false}},
+    {"id":"H09","purpose":"403 不入队","responses":[{"body":"submission","status":403}],"expected":{"error":"page_fetch_failed","status":null,"events":["fetch:1"],"body_snapshots":false}},
+    {"id":"H10","purpose":"404 不入队","responses":[{"body":"submission","status":404}],"expected":{"error":"page_fetch_failed","status":null,"events":["fetch:1"],"body_snapshots":false}},
+    {"id":"H11","purpose":"中文正文安全验证不保存正文","responses":[{"body":"captcha"}],"expected":{"error":"page_fetch_failed","status":null,"events":["fetch:1"],"diagnostic":"captcha_or_challenge","body_snapshots":false}},
+    {"id":"H12","purpose":"未知楼层结构阻断","responses":[{"body":"unknown"}],"expected":{"error":"page_fetch_failed","status":null,"events":["fetch:1"],"diagnostic":"floor_structure_unrecognized","body_snapshots":false}},
+    {"id":"H13","purpose":"无法解码不保存正文","responses":[{"hex":"ff"}],"expected":{"error":"page_fetch_failed","status":null,"events":["fetch:1"],"diagnostic":"encoding_uncertain","body_snapshots":false}}
+  ]
+}

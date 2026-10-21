@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.umalib-ingest.invalid/contracts/submission.schema.json",
+  "title": "SubmissionDraft",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "parser_status",
+    "origin",
+    "trigger",
+    "metadata",
+    "content",
+    "raw_fields",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "parser_status": {
+      "enum": ["accepted", "ignored"]
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "thread_id", "post_id", "floor", "canonical_url"],
+      "properties": {
+        "platform": { "const": "nga" },
+        "thread_id": { "type": ["string", "null"] },
+        "post_id": { "type": ["string", "null"] },
+        "floor": { "type": ["integer", "null"], "minimum": 0 },
+        "canonical_url": { "type": ["string", "null"] }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["found", "marker"],
+      "properties": {
+        "found": { "type": "boolean" },
+        "marker": { "type": ["string", "null"] }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "author", "translator", "series", "tags", "sources"],
+      "properties": {
+        "title": { "type": ["string", "null"] },
+        "author": { "type": ["string", "null"] },
+        "translator": { "type": ["string", "null"] },
+        "series": { "type": ["string", "null"] },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nga", "original_series", "original", "translation_series", "translation"],
+          "properties": {
+            "nga": { "$ref": "#/$defs/stringList" },
+            "original_series": { "$ref": "#/$defs/stringList" },
+            "original": { "$ref": "#/$defs/stringList" },
+            "translation_series": { "$ref": "#/$defs/stringList" },
+            "translation": { "$ref": "#/$defs/stringList" }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_text", "body_text"],
+      "properties": {
+        "raw_text": { "type": "string" },
+        "body_text": { "type": "string" }
+      }
+    },
+    "raw_fields": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["missing_fields", "warnings", "unknown_fields"],
+      "properties": {
+        "missing_fields": {
+          "type": "array",
+          "items": { "enum": ["title", "author", "tags", "body"] },
+          "uniqueItems": true
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/warning" }
+        },
+        "unknown_fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/unknownField" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "field", "line"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "field": { "type": ["string", "null"] },
+        "line": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "unknownField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "line"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}
+

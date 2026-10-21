@@ -1,0 +1,12 @@
+{
+  "database_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "schema_fingerprint_sha256": "d7b1966992e75819e37d41ae9c091ec21c2cdf9c5b6727af78f95398d0179aa8",
+  "tags": [
+    {"id": 1, "name": "合成角色甲", "type": 1, "usage_count": 12},
+    {"id": 2, "name": "合成系列乙", "type": 2, "usage_count": 3},
+    {"id": 3, "name": "合成重复标签", "type": 0, "usage_count": 2},
+    {"id": 4, "name": "合成重复标签", "type": 0, "usage_count": 0},
+    {"id": 5, "name": "合成长篇丙", "type": 3, "usage_count": 7},
+    {"id": 6, "name": "合成敏感丁", "type": 4, "usage_count": 1}
+  ]
+}

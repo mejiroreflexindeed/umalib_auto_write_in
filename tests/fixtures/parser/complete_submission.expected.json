@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "parser_status": "accepted",
+  "origin": {
+    "platform": "nga",
+    "thread_id": null,
+    "post_id": null,
+    "floor": null,
+    "canonical_url": null
+  },
+  "trigger": {
+    "found": true,
+    "marker": "收录"
+  },
+  "metadata": {
+    "title": "星光下的测试稿",
+    "author": "测试作者",
+    "translator": "测试译者",
+    "series": "测试系列",
+    "tags": ["角色", "翻译", "短篇"],
+    "sources": {
+      "nga": [],
+      "original_series": ["example.com/original-series"],
+      "original": ["https://example.com/original"],
+      "translation_series": ["example.com/translation-series"],
+      "translation": ["https://bbs.nga.cn/read.php?tid=1&pid=2&to=1"]
+    }
+  },
+  "content": {
+    "raw_text": "[收录]\n[标题] 星光下的测试稿\n[作者] 测试作者\n[译者] 测试译者\n[系列] 测试系列\n[标签] 角色, 翻译、短篇\n[原作系列] example.com/original-series\n[原作] https://example.com/original\n[译作系列] example.com/translation-series\n[译作] https://bbs.nga.cn/read.php?tid=1&pid=2&to=1\n\n正文第一段。\n正文中的[术语]需要保留。\n\n[术语]这是注释\n\n",
+    "body_text": "正文第一段。\n正文中的[术语]需要保留。\n\n[术语]这是注释"
+  },
+  "raw_fields": {
+    "标题": ["星光下的测试稿"],
+    "作者": ["测试作者"],
+    "译者": ["测试译者"],
+    "系列": ["测试系列"],
+    "标签": ["角色, 翻译、短篇"],
+    "原作系列": ["example.com/original-series"],
+    "原作": ["https://example.com/original"],
+    "译作系列": ["example.com/translation-series"],
+    "译作": ["https://bbs.nga.cn/read.php?tid=1&pid=2&to=1"]
+  },
+  "diagnostics": {
+    "missing_fields": [],
+    "warnings": [],
+    "unknown_fields": []
+  }
+}

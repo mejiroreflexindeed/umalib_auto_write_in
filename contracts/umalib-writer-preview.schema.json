@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.umalib-ingest.invalid/contracts/umalib-writer-preview.schema.json",
+  "title": "CandidateWritePreview",
+  "description": "Deterministic, minimal-disclosure dry-run preview produced by the candidate Writer. It never creates files; ready_to_write=true is not an authorization, writing still requires a bound CandidateWriteApproval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plan_sha256",
+    "source",
+    "candidate",
+    "operations",
+    "duplicates",
+    "ready_to_write",
+    "diagnostics",
+    "preview_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "plan_sha256": { "$ref": "#/$defs/sha256" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_name",
+        "path_sha256",
+        "database_sha256",
+        "schema_fingerprint_sha256",
+        "size_bytes",
+        "counts"
+      ],
+      "properties": {
+        "file_name": { "type": "string", "minLength": 1 },
+        "path_sha256": { "$ref": "#/$defs/sha256" },
+        "database_sha256": { "$ref": "#/$defs/sha256" },
+        "schema_fingerprint_sha256": { "$ref": "#/$defs/sha256" },
+        "size_bytes": { "type": "integer", "minimum": 0 },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["article", "tag", "tagged"],
+          "properties": {
+            "article": { "type": "integer", "minimum": 0 },
+            "tag": { "type": "integer", "minimum": 0 },
+            "tagged": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_name", "path_sha256", "exists"],
+      "properties": {
+        "file_name": { "type": "string", "minLength": 1 },
+        "path_sha256": { "$ref": "#/$defs/sha256" },
+        "exists": { "type": "boolean" }
+      }
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "article_insert_count",
+        "existing_tag_ids",
+        "create_tags",
+        "tagged_insert_count"
+      ],
+      "properties": {
+        "article_insert_count": { "const": 1 },
+        "existing_tag_ids": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "create_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/newTag" }
+        },
+        "tagged_insert_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "duplicates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exact_content_count",
+        "exact_content_article_ids",
+        "same_title_author_count",
+        "same_title_author_article_ids"
+      ],
+      "properties": {
+        "exact_content_count": { "type": "integer", "minimum": 0 },
+        "exact_content_article_ids": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "integer", "minimum": 1 }
+        },
+        "same_title_author_count": { "type": "integer", "minimum": 0 },
+        "same_title_author_article_ids": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "ready_to_write": { "type": "boolean" },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockers", "warnings"],
+      "properties": {
+        "blockers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        }
+      }
+    },
+    "preview_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "newTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "field", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "field": { "type": "string" },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
